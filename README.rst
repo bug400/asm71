@@ -12,4 +12,4 @@ ASM71 was tested on LINUX, Windows 7 and MAC/OS.
 Get Started
 ===========
 To compile ASM71 you need the Free Pascal Compiler: http://www.freepascal.org
-for the destination platform and compile the asm71.pas source file.
+for the destination platform. See INSTALL for further details.
