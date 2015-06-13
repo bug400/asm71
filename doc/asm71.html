@@ -1,0 +1,707 @@
+<HTML>
+<HEAD>
+<TITLE>ASM71 Crossassembler for the HP-71B Version </TITLE>
+</HEAD>
+<BODY>
+
+<H1>ASM71</H1>
+<H3>A Crossassembler for the HP-71B </H3>
+<HR SIZE="3">
+<H3>Introduction</H3>
+<p>ASM71 is a cross assembler for the HP-71B which is almost completely compatible to the
+assembler of the HP-71B Forth/Assembler ROM. The assembler creates LIF compatible LEX- or BIN- files
+which can be transferred to the HP-71B.
+</p>
+
+<H3>Requirements</H3>
+
+<p>
+You need a solution to transfer the LEX- or BIN-Files to a HP-71B. See the
+<a href="http://www.jeffcalc.hp41.eu/hpil/" >PIL-Box project</a> for details.
+</p>
+  
+<p>
+The <i>Software Internal Design Specification for the HP-71B 
+(Volume 1 und 2)</i> is needed as well. This documentation contains 
+all information that is necessary to create assembler programs for the
+HP-71B. The documents are contained in the documentation set that can be
+obtained by the <a href="www.hpmuseum.org">Museum of HP Calculators</a>.
+</p>
+
+<H3>Usage</H3>
+<P>
+ASM71 <i>Sourcefile</i>,<i>Objectfile</i>,<i>Listingfile</i>,<i>Optionens</i>  
+</p>
+<P>
+<i>Sourcefile</i>: This file contains the HP-71B assembler source code. The
+source file must be specified. If no file suffix is speficied, '.asm' is used.
+</p>
+
+<P>
+<i>Objectfile</i>: This is the name of the LIF compatible LEX or BIN file that
+is created as the result of the assembly. If the name of the objectfile is omitted, the
+filename is created of the name of the source file and the suffix '.lex' or'.bin'.
+If any error occurs during assembly the object file is deleted.
+</p>
+<P>
+<i>Listingfile</i>: This file contains the listing of the source file, the compiled code,
+diagnostics and a symbol reference table. If the name of the listingfile is omitted,
+then no listing and no reference table are created and the diagnostics are written to
+standard output. The default suffix is '.lst'.
+</p>
+<P>
+<i>Options</i>: An Option consists of an option identifier (Letter) and a value (number).
+All Options and their identifiers and values must be contigously speficied without
+any white spaces or colons.
+</p>
+<P>
+<PRE> 
+Identifier  Value     Description
+---------------------------------------------
+R           0         no symbol table
+            1         symbol table (default)     
+            2         symbol table with cross reference listing  
+L           8-32767   number of lines per page (default: 63)                           
+</PRE>
+</p>
+<P>
+<H4>Examples</H4>
+<P>
+<i>asm71 prog</i>
+</P>
+<P>
+Source file : <i>prog.asm</i>, object file : <i>prog.lex</i>, Listingdatei :  (none)
+</P>
+<P>
+<i>asm71 prog,,prog,R2L40</i>
+<P>
+Source file : <i>prog.asm</i>, object file : <i>prog.lex</i>, listing file : <i>prog.lst</i>  
+</P>
+<P>
+<i>prog.lst</i> contains a symbol table with a cross reference listing and 40 lines per page.
+</P>
+<P>
+<i>asm71 prog,test</i> 
+</P>
+<P>
+Source file : <i>prog.asm</i>,  object file : <i>test.lex</i>, listingfile :   (none)  
+</P>
+<H3>Assembler Source Code</H3>
+<P>
+The assembler source file must have the following form:  
+<PRE>
+<i>Output psuedo op</i>
+...  
+<i>Code</i>  
+...  
+<i>END</i>
+</PRE>
+The output pseudo-op must be either <i>LEX</i> or <i>BIN</i> to determine whether the output
+will be a LEX- or a BIN-file. The pseudo-op <i>END</i> indicates the end of the source code.
+</P>
+
+<P>
+The code portion of the source file consists of any number of text lines, each containing
+one ore more of the following items: label, menmonic, modifier, pseudo-op, expression, comment.
+</P>
+
+<H4>Line format</H4>
+<p>
+The recommended column alignment for the assembler source code is:  
+<PRE>
+label    mnemonic  modifier  comment  
+^        ^         ^         ^
+1.       8.        15.       24. column  
+</PRE>
+</p>
+<P>
+However the assembler is "free format" and only the following requirements must be met:  
+<UL>
+<LI>labels must begin in column 1 or 2  </LI>
+<LI>the other fields must be delimited by at least one space </LI>
+</UL> 
+The maximum length for labels and modifiers is 6 characters, the maximum length for modifiers is 50 characters.
+</P>
+
+<H4>Comments</H4>
+<P>
+Text that follows a complete instruction - a mnemonic and any required modifiers - is a comment. If 
+the first non blank character in column 1 or 2 is a star then the entire line is a comment.
+</p>
+
+<H4>Labels</H4>
+<P>
+Labels can contain up to six characters. All alphanumeric characters are allowed except commas,
+spaces and right parantheses. The first character cannot be a sharp (#), single quote('),
+minus sign (-), left paranthesis, star (*) or the digits 0 through 9. The labels are case
+sensitive! The restricted label 'FiLeNd' is reserved and must not be used in the soure code.
+The assembler has an internal table of the names and addesses of the 
+<i>Supported Entry Points (HP-71B and HP-IL-Module)</i> und der <i>Fixed RAM-Locations</i>. These external symbols can be used in modifiers only
+by applying a leading equal sign (=). It is not allowed to use labels with leading equal signs
+in the label field.
+</P>
+<P>
+Example:  
+<PRE>
+FNRTN1   EQU   #0F216
+...  
+GOVLNG   FNRTN1  
+</PRE>
+can be coded as:  
+<PRE>
+GOVLNG   =FNRTN1  
+</PRE>
+</P>
+
+<H4>Expressions</H4>
+<P>
+Expressions can contain labels, the location counter value, constants and operators.
+Any expression in parantheses can be nested within a larger experssion. The level of
+nesting is not limited.
+</P>
+
+
+<H5>Labels</H5>
+<P>
+Legal label names are described above. When the label is used within a larger expression, 
+parantheses are required: <i>(XY-001)</i> is a label, but <i>XY-001</i> is an expression.  
+</P>
+
+<H5>Location Counter Value</H5>
+<P>
+A star (*) in an expression represents the value of the location counter at the beginning
+of the current instructions. The value of the location counter is 0 at the beginning of the
+assembly.
+</p>
+
+<H5>Constants</H5>
+
+<p>
+The numeric value of a constant can be expressed in decimal, hexadecimal or ASCII.:  
+<UL>
+<LI>Decimal constants can't exceed 1.048.575.<BR>Example:    12345 </LI> 
+<LI>Hexadecimal constants must start with a sharp (#) and can't exceed FFFFF. Hexadecimal constants
+are required with LCHEX and NIBHEX. Leading (#) is optional if hexadecimal constants are required.<BR>  
+Example:   #F4D2  </LI>
+<LI> ASCII constants must be enclosed within singel quotes (') and can contain one or two characters.
+ASCII constants are required with LCASC or NIBASC. With LCASC or NIBASC the length of the ASCII constant
+can exceed 2 characters. <BR> 
+Example:   'XY' 
+</LI>
+</UL>
+</P>
+  
+<H5>Operators</H5>
+<P>
+There are seven operators listed below in the descending order of precedence:  
+<table>
+<tr>
+<td align="center">- (unary minus)</td>
+</tr>  
+<tr>
+<td>&amp; (logical AND)</td>
+<td>! (logical OR)</td>
+</tr>
+<tr>  
+<BR>
+<td>* (Multiplication)</td>   
+<TD>/ (integer Division)</td>
+</tr>
+<tr>  
+<td>+ (Addition)</td>            
+<td>- (Subtraktion)</td>
+</tr>
+</table>
+</P>
+
+<H4>Assembler Mnemonics</H4>
+<P>
+The HP-71B Assembler Mnemonics are described in detail in the HP-71 Software IDS Band 1. Note that asm71 dos not support the following mnemonics:
+<PRE>
+D0=HEX hh  
+D0=HEX hhhh  
+D0=HEX hhhhh  
+D1=HEX hh  
+D1=HEX hhhh  
+D1=HEX hhhhh  
+</PRE>
+</P>
+<P>
+Note: the ASCII constant following the Mnemonic LCASC must be enclosed in single quotes (').
+</P>
+
+<H3>Pseudo-ops</H3>
+<H4>Control pseudo-ops</H4>
+<P>
+<PRE>
+EJECT
+</PRE>
+Generates a form feed in the assembler listing file. 
+<PRE>
+END
+</PRE>
+Marks the end of the assembly source file. Any characters in the file
+following END are ignored. This pseudo-op is optional.
+<PRE>
+<i>label</i> EQU <i>expression</i>
+</PRE>
+Define the <i>label</i> to have the value of <i>expression</i>.
+<PRE>
+LIST ON/LIST OFF
+</PRE>
+Send/suppress output to the listing file.  
+<PRE>
+TITLE <i>title</i>
+</PRE>
+Put <i>title</i> at the beginning of each page of the listing file. The text
+for <i>title</i> can contain up to 40 characters.  
+<PRE>
+STITLE <i>subtitle</i>
+</PRE>
+Force a new page and put <i>subtitle</i> at the top of each page of the listing
+file just underneath the title. The text for the <i>subtitle</i> can contain up
+to 40 characters.
+</p>
+
+<h4>Constant-Generating Pseudo-ops</h4>
+<p>
+<PRE>
+BSS <i>expression</i>
+</PRE>
+Evaluate <i>expression</i> and generate that number of zero nibbles.
+<PRE>
+CON(i) <i>expression</i>
+</PRE>
+Evaluate <i>expression</i> and generate an absoulte constant of length <i>i</i>nibbles,
+1<=<i>i</i><=5.
+<PRE>
+NIBASC <i>'chars'</i>
+</PRE> 
+Generate the specified ASCII characters, with the two nibbles within each byte
+reversed. The modifier field may specify up to eight characters.
+<PRE>
+NIBHEX <i>h....h</i>
+</PRE>
+Generate up to sixteen hexadecimal nibbles.  
+<PRE>
+REL(i) <i>expression</i>
+</PRE>
+Evaluate <i>expression</i> and generate a constant (relative to the current
+location counter) of length <i>i</i> nibbles, 1<=<i>i</i><=5.
+</P>
+
+<H4>Macro expansion pseudo-ops for LEX files</h4>
+<P>
+These macros support the generation of LEX files. The macros expand to
+pseudo-ops that generate the file header, the main- and the texttable.
+</P>
+
+<P>
+<PRE>
+LEX <i>'name'</i>
+</PRE>
+Assemble a new LEX file. This macro must be the first line in the source
+file. The string <i>name</i> specifies the file name that is inserted 
+in the LIF header of the LEX file. The string  <i>name</i> does not
+specify the name of the object file that is generated by the assembler.
+The LEX file will have the correct header. The initial data for this
+file is defined by the <i>ID</i>, <i>MSG</i> and <i>POLL</i> macros,
+which must be present in that order.
+<PRE>
+ID <i>byte</i>
+</PRE>
+Define the LEX ID of this LEX file. The <i>byte</i> is placed in the appropriate data
+field.  
+<PRE>
+MSG <i>label</i>
+</PRE>
+Defines the beginning of this LEX file's message table. <i>MSG</i> will place
+<i>label</i> in the appropriate field. If there is no message table, enter
+<i>MSG 0</i>.  
+<PRE>
+POLL <i>label</i>
+</PRE>
+Defines the beginning of this LEX file's poll-handling-routine. <i>POLL</i> will place
+<i>label</i> in the appropriate field. If there is no poll-handling-routine, enter
+<i>POLL 0</i>.  
+<PRE>
+ENTRY <i>label</i>
+</PRE>
+Begin the definition of a <i>BASIC</i> keyword. Each keyword requires four pseudo-ops:
+<i>ENTRY</i>, <i>CHAR</i>,<i>KEY</i> and <i>TOKEN</i>. Because of the structure of the
+LEX file's keyword table, these pseudo-ops require a particular order. For example, the
+following assembly language header defines two keywords, <i>KEY1</í> and <i>KEY2</i>.
+</p>
+<p>
+<table>
+<tr>
+<td>
+ENTRY <i>label1</i>
+</td>  
+<td>The code for the first keyword begins at <i>label1</i>.
+</td>
+</tr>
+<tr>
+<td>
+CHAR  5
+</td>
+<td>
+The first keyword is legal for keyboard execution and after <i>THEN .. ELSE</i>.
+</td>
+</tr>
+<tr>
+<td>
+ENTRY <i>label2</i>
+</td>
+<td>The code for the first keyword begins at <i>label1</i>.
+</td>
+</tr>
+<tr>
+<td>
+CHAR #F
+</td>
+<td>
+The second keyword is a function.
+</td>
+</tr>
+<tr>
+<td>
+KEY  'KEY1'
+</td>
+<td>
+The first keyword is invoked with <i>KEY1</i> in BASIC.
+</td>
+</tr>
+<tr>
+<td>
+TOKEN 1
+</td>
+<td>
+The first keyword has token 1.
+</td>
+</tr>
+<tr>
+<td>
+TOKEN 2
+</td>
+<td>
+The first keyword has token 2.
+</td>
+</tr>
+<tr>
+<td>
+ENDTXT
+</td>
+<td>
+End of text table
+</td>
+</tr>
+</table>
+<PRE>
+CHAR <i>h</i>
+</PRE>
+</i>
+<P>
+Describe the type of the BASIC keyford. Each <i>ENTRY</i> requires a corresponding
+<i>CHAR</i>, which places a "characterization nibble" in the keyword tables. The
+characterization nibble defines BASIC keywords as follows:
+</P>
+
+<PRE>
+Value    Type of keyword
+----------------------------------
+1        Keyboard execution
+4        Legal after <i>THEN .. ELSE</i>
+8        Begin BASIC (legal as first keyword in a statement)
+15       BASIC-function
+</PRE>
+<P>
+Other values for the characterization nibble define combinations of the above types.
+For example a characerization nibble of 5 defines a keyword that is legal for
+keyboard execution and after <i>THEN .. ELSE</i>.
+<PRE>
+KEY <i>'name'</i>
+</PRE>
+Define the name that will evoke the keyword in BASIC. When there are multiple keywords in one LEX file,
+the names of the keywords must be in alphabetic order. There is one exception: the name <i>'abc'</i> is 
+not before the name <i>'abcd'</i>. If the first characters are the same the <i>longer</i> text must come
+first. Otherwise the BASIC operating system will never find the longer keyword.
+<PRE>
+TOKEN <i>number</i>
+</PRE>
+Define the token number of the keyword most recently named (by <i>KEY</i>).
+When there are multiple keywords in one LEX file, their token numbers
+must be in ascending order. <i>TOKEN</i> places the token number in the keyword
+tables.
+
+<PRE>
+ENDTXT
+</PRE>
+Mark the end of the keyword tables. This pseudo-op follows the <i>ENTRY</i>,
+<i>CHAR</i>, <i>KEY</i> or <i>TOKEN</i>  pseudo-ops when a keyword is defined, or it marks
+their absence if no keyword is defined.
+</p>
+
+
+<H4>Macro expansion pseudo-ops for BIN files</h4>
+<P>
+These macros support the generation of BIN files. The macros expand to
+pseudo-ops that generate the file header and the subprogram chain.
+</P>
+
+<P>
+<PRE>
+BIN <i>'name'</i>
+</PRE>
+Assemble a new bin file. This macro must be the first line in the source
+file. The string <i>name</i> specifies the file name that is inserted 
+in the LIF header of the bin file. The string  <i>name</i> does not
+specify the name of the object file that is generated by the assembler.
+The user must create the sub header using the <i>CHAIN</i> pseudo-op.
+<PRE>
+CHAIN <i>label</i>
+</PRE>
+Create a 12-nibble subheader containing a subprogram and label chain. If
+there are no subprograms, enter <i>CHAIN -1</i>.
+</P>
+
+<H3>Differences betweed asm71 and the assembler of the HP71-Forth/Assembler Rom </H3>
+<UL>
+<li>asm71 does not support FORTH primitives</li>
+<li>The length of labels is limited to 6 characters. Extra characters raise a syntax error.</li>
+<li>The filename in the LEX- and BIN- pseudo ops must be a valid LIF filename</li>
+<li>Labels with a leading "=" cannot be used in label fields</li>
+<li>Global  labels of the <i>Supported Entry Points (HP-71B and HP-IL module)</i> and the <i>RAM-Locations</i> can be used in the 
+modifier filed with a leading "="</li>
+<li>The depth of expressions in the modifier field is not limited</li>
+<li>asm71 supports the generation of symbol cross reference listings</li>
+<li>The B=B+A and D1=AS opcode opcode errors of the HP-71B Forth/Assembler rom have been fixed in asm71. The other known
+rom errors do not apply to the asm71.</li>
+</ul>
+
+<H3>Format of the object file </H3>
+
+<p>The LEX or BIN files are generated with a 32 byte LEX file header. The
+following fields of the lex file header are initialized by asm71
+(see: HP-IL Interface Owner's Manual, pp. 234):
+</p>
+<PRE>
+Byte  Definition             initialized by asm71
+------------------------------------------------  
+0-9   File Name              yes
+10-11 File Type              yes
+12-15 File Start Record      no
+16-19 File Length            yes
+20-25 Date and Time created  yes
+26-27 Volume/Flag number     yes
+28-31 Implementation         yes
+</PRE>
+
+<H3>Error Messages </H3>
+<PRE>
+ascii constant overflow 
+</PRE>
+An ASCII constant is greater than #FFFFF.  
+<PRE>
+assembler aborted 
+</PRE>
+The assembly was terminated because of an error.
+<PRE>
+cannot open source file --- Runtime Error Message 
+</PRE>
+I/O error while opening the source file.
+<PRE>
+cannot open object file --- Runtime Error Message 
+</PRE>
+I/O error while creating the object file.
+<PRE>
+cannot output object code --- Runtime Error Message 
+</PRE>
+I/O error while writing to the object file.
+<PRE>
+cannot read source line --- Runtime Error Message
+</PRE>
+I/O error while reading the source file.
+<PRE>
+cannot reset source file --- Runtime Error Message 
+</PRE>
+I/O error while rewinding the source file.
+<PRE>
+cannot resolve equate 
+</PRE>
+The evaluation of the equate differs between the first and second passes. Check that all parts of the
+expression can be evaluated during the first pass.
+<PRE>
+cannot write to list file --- Runtime Error Message 
+</PRE>
+I/O error while writing to the listing file
+<PRE>
+decimal constant overflow 
+</PRE>
+A decimal constant is greater than 1.048.575.  
+<PRE>
+duplicate label 
+</PRE>
+An existing label name is used again in the label field. Rename the duplicate label.
+<PRE>
+expression overflow 
+</PRE>
+The result of an expression is greater than #FFFFF.  
+<PRE>
+excess characters in expression 
+</PRE>
+An expression contains too many characters. Check that the expression is stated correctly.
+<PRE>
+excess characters in label field 
+</PRE>
+The label field contains more than six characters.  
+<PRE>
+excess characters in opcode field 
+</PRE>
+The mnemonic field contains more than six characters.
+<PRE>
+external symbol definition not allowed 
+</PRE>
+The label in the label field has a leading (=). Global labels are not allowed in this field.
+<PRE>
+GOYES or RTNYES required 
+</PRE>
+A test instruction <i>?XXX</i> is not followed by a  <i>GOYES</i> or <i>RTNYES</i>.
+The test and branch instructions appear to be separate but combine to form one instruction. 
+<PRE>
+hexadecimal constant overflow 
+</PRE>
+A hexadezimal constant is greater than #FFFFF.  
+<PRE>
+illegal commandline option 
+</PRE>
+An other option identifier than <i>R</i> or <i>L</i> was used.
+<PRE>
+illegal dp arithmetic value 
+</PRE>
+An illegal value is used in data-pointer arithmetic. Check that the value of the modifier field is from
+through 16.
+<PRE>
+illegal expression 
+</PRE>
+An expression has illegal syntax or is too complicated. Check the syntax, the levels of parentheses, and
+the number of operations.
+<PRE>
+illegal pointer position 
+</PRE>
+The pointer register is set to or tested for an illegal value. Check that the value of the modifier field is
+from 0 through 15.
+<PRE>
+illegal status bit 
+</PRE>
+The status bits are set to or tested for an illegal value. Check that the value of the modifier field is from
+o through 15.
+<PRE>
+illegal symbol 
+</PRE>
+A label within an expression has more than six characters.
+<PRE>
+illegal transfer value 
+</PRE>
+An illegal value is used in data transfer. Check that the modifier field contains a valid word select or a
+number from 1 through 16.
+<PRE>
+illegal word select 
+</PRE>
+The modifier field isn't a valid word select. Valid entries are: A, B, M, P, S, W, WP, X, and XS.
+<PRE>
+invalid HP-71 filename specifier 
+</PRE>
+The filename specifier following <i>LEX</i> or <i>BIN</i> pseudo-op isn't a valid filename. Fatal to assembly.
+Refer to the HP-71 Owner's Manual for valid filenames.
+<PRE>
+invalid listing argument 
+</PRE>
+The modifier field of LIST is neither <i>ON</i> nor <i>OFF</i>. Check that the modifier is uppercase.
+<PRE>
+invalid quoted string 
+</PRE>
+One or both single quotes are missing from a quoted string or quoted constant.
+<PRE>
+jump or value too large 
+</PRE>
+<UL>
+<LI>The target of a jump or subroutine call instruction is too far away. Use
+long jump or long subroutine call instructions.
+<LI>The value of a constant requires more nibbles than the instruction can
+generate. Check the value of the constant.
+</LI>
+</UL> 
+<PRE>
+mismatched parantheses
+</PRE>
+The number of left an right parantheses must be equal. At least one right paranthesis is missing.
+<PRE>
+missing/illegal label 
+</PRE>
+Illegal characters appear in a label, or a label required for an EO U instruction is missing. Check that a
+legal label is present.
+<PRE>
+missing/multiple filetype 
+</PRE>
+The first line in the source file isn't LEX or BIN (fatal to assembly); or one of these pseudo-
+ops appears a second time; or any pseudo-op of the wrong type appears. 
+<PRE>
+needs previous test instruction 
+</PRE>
+GOYES or RTNYES instruction appears without a preceding test instruction. The test and branch
+instructions appear to be separate but combine to form one instruction. Supply the missing test
+instruction.
+<PRE>
+non-hexadecimal digit present 
+</PRE>
+The modifier field contains illegal characters. Use only hex digits 0 through F.
+<PRE>
+pagesize too small 
+</PRE>
+The value for the <i>P</i> Option is too small.
+<PRE>
+restricted label FiLeNd exists 
+</PRE>
+The user has placed this restricted label in the source file. Fatal to assembly. Choose a different label.
+<PRE>
+too many hexadecimal digits present 
+</PRE>
+The modifier field contains more than 16 hex digits. Use no more than 16 hex digits.
+<PRE>
+unknown opcode 
+</PRE>
+The opcode isn't recognized. Check that the opcode is spelled correctly, in uppercase letters, and 
+properly placed in an opcode field.
+<P>
+P=1  (wrong)
+<P>
+P=    1 (correct)  
+<PRE>
+unrecognized label 
+</PRE>
+An undefined label appears within an expression. Check whether parentheses are required to separate
+the label from an operator.
+<P>
+<H3>License</H3>
+<p>
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+</p>
+
+<p>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+</p>
+
+<p>
+The complete text of the GNI General Public License
+can be found on <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>
+</p>
+
+</BODY>       
+</HTML>

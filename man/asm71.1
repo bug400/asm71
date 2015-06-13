@@ -1,0 +1,97 @@
+.TH asm71  10-April-2015 "HP-71 Cross Assembler"
+.SH NAME
+asm71 \- assemble LEX or BIN files for the HP-71B
+.SH SYNOPSIS
+.B asm71
+.I <source file>,<object file>,<listing file>,<options>
+.SH DESCRIPTION
+.B asm71
+assembles a 
+.I source file
+and creates an object file (lex or bin file). The source file name is required. The default extension is .asm.
+.I object file
+is an optional parameter and specifies the name of the object file. The default for
+this parameter is the name of the
+.I input file
+with the extension .lex or .bin.
+.I listing file
+is an optional parameter and specifies the name of the listing file. The listing file
+contains the program source, diagnostics and a symbol reference table. The default extension is '.lst'.
+If no listing file is specified then diagnostic messages are printed to standard output.
+.SH OPTIONS
+.TP
+.I Rn
+Controls the symol reference table: no table (n=0), simple symbol reference table (n=1, default) or
+cross reference table with line numbers (n=2)
+.TP
+.I Lnn
+Number of lines per page of output file (default=63).
+.TP
+Note that the options and their values must neither be seperated by a blank or a colon.
+.SH EXAMPLES
+If 
+.I test.asm
+is a text file containig the assembler source of a lex file then
+.PP
+.B asm71 test
+.PP
+will assemble the source file 
+.I test.asm
+to the file 
+.I test.lex 
+with no program listing.
+.PP
+.B asm71 test,,test,R2L60
+.PP
+will assemble the source file
+.I test.asm
+to the file
+.I test.lex
+and create a listing file
+.I test.lst
+with a symbol cross reference listing with 60 lines per page.
+.SH 
+.SH REFERENCES
+asm71 is almost completely compatible to the assembler which is part of the HP-71B Forth/Assembler rom. The
+differences are:
+.IP \(bu 5
+asm71 does not support FORTH primitives
+.IP \(bu 5
+the length of labels is limited to 6 characters
+.IP \(bu 5
+the filename in the 
+.I
+LEX-
+and
+.I BIN-
+pseudo ops must be a valid LIF filename
+.IP \(bu 5
+labels with leading "=" cannot be used in label fields
+.IP \(bu 5
+global labels of the 
+.I Supported Entry Points
+and the
+.I RAM-Locations
+can be used in the modifier filed with leading "="
+.IP \(bu 5
+the depth of expressions in the modifier field is not limited
+.IP \(bu 5
+asm71 supports the generation of symbol cross reference listings
+.PP
+Further information exists in the asm71.html file which is part of this software.
+.P
+The 
+.I Software Internal Design Specification for the HP-71B (Volume 1 und 2)
+contains all information that is necessary to create assembler programs for the
+HP-71B. The documents are contained in the documentation set that can be
+obtained by the Museum of HP Calculators, see:
+.URL
+http://www.hpmuseum.org
+.P
+.SH BUGS
+The B=B+A and D1=AS opcode opcode errors of the HP-71B Forth/Assembler rom have been fixed in asm71. The other known
+rom errors do not apply to the asm71.
+.SH AUTHOR
+.B asm71
+was written by Joachim Siebold, bug400@gmx.de and has been placed 
+under the GNU Public License version 2.0
