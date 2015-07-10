@@ -33,7 +33,7 @@ INSTALLATION
 To compile ASM71 you need the Free Pascal Compiler: http://www.freepascal.org
 for the destination platform. See INSTALL for further details.
 
-The release section provides precompiled binaries for LINUX (32 and 64bit),
+The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit),
 Windows (32 bit) and Mac OS/X.
 
 License
