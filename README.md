@@ -7,7 +7,6 @@ Index
 * [Compatibility](#compatibility)
 * [Installation] (#installation)
 * [License](#license)
-* [Acknowledgements](#acknowledgements)
 
 
 Description
