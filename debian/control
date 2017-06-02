@@ -1,10 +1,9 @@
 Source: asm71
 Section: misc
 Priority: optional
-Maintainer: Joachim Siebold <jsi150@gmx.de>
+Maintainer: Joachim Siebold <bug400@gmx.de>
 Build-Depends: binutils, fpc, debhelper, autoconf, automake, libtool, build-essential, cdbs
 Standards-Version: 0.9
-Homepage: http://www.kiwix.org/
 
 Package: asm71
 Architecture: any
