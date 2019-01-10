@@ -1,16 +1,17 @@
-## ASM71 (cross assembler for the HP-71B)
+ASM71 (cross assembler for the HP-71B)
+======================================
 
 Index
 -----
 
 * [Description](#description)
 * [Compatibility](#compatibility)
-* [Installation] (#installation)
+* [Installation](#installation)
 * [License](#license)
 
 
 Description
-===========
+-----------
 
 ASM71 is a cross assembler for the HP-71B which is almost completely compatible 
 with the assembler of the HP-71B Forth/Assembler ROM. The assembler creates LIF 
@@ -21,13 +22,13 @@ for more information about features and usage.
 
 
 Compatibility
-=============
+-------------
 
-ASM71 was tested on LINUX, Windows 7 and Mac OS/X.
+ASM71 was tested on LINUX, Windows 10 and Mac OS/X.
 
 
 INSTALLATION
-============
+------------
 
 To compile ASM71 you need the Free Pascal Compiler: http://www.freepascal.org
 for the destination platform. See INSTALL for further details.
@@ -36,7 +37,7 @@ The [release](https://github.com/bug400/asm71/releases) section provides precomp
 Windows (32 bit) and Mac OS/X.
 
 License
-=======
+-------
 
 ASM71 is publishd under th GNU General Public License v3.0 License 
 (see LICENSE file).

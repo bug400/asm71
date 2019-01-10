@@ -1,11 +1,11 @@
 <HTML>
 <HEAD>
-<TITLE>ASM71 Crossassembler for the HP-71B Version </TITLE>
+<TITLE>ASM71 Cross Assembler for the HP-71B Version </TITLE>
 </HEAD>
 <BODY>
 
 <H1>ASM71</H1>
-<H3>A Crossassembler for the HP-71B </H3>
+<H3>A Cross Assembler for the HP-71B </H3>
 <HR SIZE="3">
 <H3>Introduction</H3>
 <p>ASM71 is a cross assembler for the HP-71B which is almost completely compatible to the
@@ -22,7 +22,7 @@ You need a solution to transfer the LEX- or BIN-Files to a HP-71B. See the
   
 <p>
 The <i>Software Internal Design Specification for the HP-71B 
-(Volume 1 und 2)</i> is needed as well. This documentation contains 
+(Volume 1 and 2)</i> is needed as well. This documentation contains 
 all information that is necessary to create assembler programs for the
 HP-71B. The documents are contained in the documentation set that can be
 obtained by the <a href="www.hpmuseum.org">Museum of HP Calculators</a>.
@@ -30,28 +30,28 @@ obtained by the <a href="www.hpmuseum.org">Museum of HP Calculators</a>.
 
 <H3>Usage</H3>
 <P>
-ASM71 <i>Sourcefile</i>,<i>Objectfile</i>,<i>Listingfile</i>,<i>Optionens</i>  
+ASM71 <i>Source file</i>,<i>Object file</i>,<i>Listing file</i>,<i>Options</i>  
 </p>
 <P>
-<i>Sourcefile</i>: This file contains the HP-71B assembler source code. The
-source file must be specified. If no file suffix is speficied, '.asm' is used.
+<i>Source file</i>: This file contains the HP-71B assembler source code. The
+source file must be specified. If no file suffix is specified, '.asm' is used.
 </p>
 
 <P>
-<i>Objectfile</i>: This is the name of the LIF compatible LEX or BIN file that
-is created as the result of the assembly. If the name of the objectfile is omitted, the
+<i>Object file</i>: This is the name of the LIF compatible LEX or BIN file that
+is created as the result of the assembly. If the name of the object file is omitted, the
 filename is created of the name of the source file and the suffix '.lex' or'.bin'.
 If any error occurs during assembly the object file is deleted.
 </p>
 <P>
-<i>Listingfile</i>: This file contains the listing of the source file, the compiled code,
-diagnostics and a symbol reference table. If the name of the listingfile is omitted,
+<i>Listing file</i>: This file contains the listing of the source file, the compiled code,
+diagnostics and a symbol reference table. If the name of the listing file is omitted,
 then no listing and no reference table are created and the diagnostics are written to
 standard output. The default suffix is '.lst'.
 </p>
 <P>
-<i>Options</i>: An Option consists of an option identifier (Letter) and a value (number).
-All Options and their identifiers and values must be contigously speficied without
+<i>Options</i>: An option consists of an option identifier (Letter) and a value (number).
+All options and their identifiers and values must be contiguously specified without
 any white spaces or colons.
 </p>
 <P>
@@ -70,7 +70,7 @@ L           8-32767   number of lines per page (default: 63)
 <i>asm71 prog</i>
 </P>
 <P>
-Source file : <i>prog.asm</i>, object file : <i>prog.lex</i>, Listingdatei :  (none)
+Source file : <i>prog.asm</i>, object file : <i>prog.lex</i>, listing file :  (none)
 </P>
 <P>
 <i>asm71 prog,,prog,R2L40</i>
@@ -84,7 +84,7 @@ Source file : <i>prog.asm</i>, object file : <i>prog.lex</i>, listing file : <i>
 <i>asm71 prog,test</i> 
 </P>
 <P>
-Source file : <i>prog.asm</i>,  object file : <i>test.lex</i>, listingfile :   (none)  
+Source file : <i>prog.asm</i>,  object file : <i>test.lex</i>, listing file :   (none)  
 </P>
 <H3>Assembler Source Code</H3>
 <P>
@@ -132,11 +132,11 @@ the first non blank character in column 1 or 2 is a star then the entire line is
 <H4>Labels</H4>
 <P>
 Labels can contain up to six characters. All alphanumeric characters are allowed except commas,
-spaces and right parantheses. The first character cannot be a sharp (#), single quote('),
-minus sign (-), left paranthesis, star (*) or the digits 0 through 9. The labels are case
-sensitive! The restricted label 'FiLeNd' is reserved and must not be used in the soure code.
-The assembler has an internal table of the names and addesses of the 
-<i>Supported Entry Points (HP-71B and HP-IL-Module)</i> und der <i>Fixed RAM-Locations</i>. These external symbols can be used in modifiers only
+spaces and right parentheses. The first character cannot be a sharp (#), single quote('),
+minus sign (-), left parenthesis, star (*) or the digits 0 through 9. The labels are case
+sensitive! The restricted label 'FiLeNd' is reserved and must not be used in the source code.
+The assembler has an internal table of the names and addresses of the 
+<i>Supported Entry Points (HP-71B and HP-IL-Module)</i> and the <i>Fixed RAM-Locations</i>. These external symbols can be used in modifiers only
 by applying a leading equal sign (=). It is not allowed to use labels with leading equal signs
 in the label field.
 </P>
@@ -156,7 +156,7 @@ GOVLNG   =FNRTN1
 <H4>Expressions</H4>
 <P>
 Expressions can contain labels, the location counter value, constants and operators.
-Any expression in parantheses can be nested within a larger experssion. The level of
+Any expression in parentheses can be nested within a larger expression. The level of
 nesting is not limited.
 </P>
 
@@ -164,7 +164,7 @@ nesting is not limited.
 <H5>Labels</H5>
 <P>
 Legal label names are described above. When the label is used within a larger expression, 
-parantheses are required: <i>(XY-001)</i> is a label, but <i>XY-001</i> is an expression.  
+parentheses are required: <i>(XY-001)</i> is a label, but <i>XY-001</i> is an expression.  
 </P>
 
 <H5>Location Counter Value</H5>
@@ -183,7 +183,7 @@ The numeric value of a constant can be expressed in decimal, hexadecimal or ASCI
 <LI>Hexadecimal constants must start with a sharp (#) and can't exceed FFFFF. Hexadecimal constants
 are required with LCHEX and NIBHEX. Leading (#) is optional if hexadecimal constants are required.<BR>  
 Example:   #F4D2  </LI>
-<LI> ASCII constants must be enclosed within singel quotes (') and can contain one or two characters.
+<LI> ASCII constants must be enclosed within single quotes (') and can contain one or two characters.
 ASCII constants are required with LCASC or NIBASC. With LCASC or NIBASC the length of the ASCII constant
 can exceed 2 characters. <BR> 
 Example:   'XY' 
@@ -209,7 +209,7 @@ There are seven operators listed below in the descending order of precedence:
 </tr>
 <tr>  
 <td>+ (Addition)</td>            
-<td>- (Subtraktion)</td>
+<td>- (Subtraction)</td>
 </tr>
 </table>
 </P>
@@ -272,7 +272,7 @@ Evaluate <i>expression</i> and generate that number of zero nibbles.
 <PRE>
 CON(i) <i>expression</i>
 </PRE>
-Evaluate <i>expression</i> and generate an absoulte constant of length <i>i</i>nibbles,
+Evaluate <i>expression</i> and generate an absolute constant of length <i>i</i> nibbles,
 1<=<i>i</i><=5.
 <PRE>
 NIBASC <i>'chars'</i>
