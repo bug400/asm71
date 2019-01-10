@@ -273,7 +273,7 @@ Evaluate <i>expression</i> and generate that number of zero nibbles.
 CON(i) <i>expression</i>
 </PRE>
 Evaluate <i>expression</i> and generate an absolute constant of length <i>i</i> nibbles,
-1<=<i>i</i><=5.
+1&gt;=<i>i</i>&lt;=5.
 <PRE>
 NIBASC <i>'chars'</i>
 </PRE> 
@@ -293,7 +293,7 @@ location counter) of length <i>i</i> nibbles, 1<=<i>i</i><=5.
 <H4>Macro expansion pseudo-ops for LEX files</h4>
 <P>
 These macros support the generation of LEX files. The macros expand to
-pseudo-ops that generate the file header, the main- and the texttable.
+pseudo-ops that generate the file header, the main- and the text table.
 </P>
 
 <P>
@@ -402,7 +402,7 @@ CHAR <i>h</i>
 </PRE>
 </i>
 <P>
-Describe the type of the BASIC keyford. Each <i>ENTRY</i> requires a corresponding
+Describe the type of the BASIC keyword. Each <i>ENTRY</i> requires a corresponding
 <i>CHAR</i>, which places a "characterization nibble" in the keyword tables. The
 characterization nibble defines BASIC keywords as follows:
 </P>
@@ -417,7 +417,7 @@ Value    Type of keyword
 </PRE>
 <P>
 Other values for the characterization nibble define combinations of the above types.
-For example a characerization nibble of 5 defines a keyword that is legal for
+For example a characterization nibble of 5 defines a keyword that is legal for
 keyboard execution and after <i>THEN .. ELSE</i>.
 <PRE>
 KEY <i>'name'</i>
@@ -461,11 +461,11 @@ The user must create the sub header using the <i>CHAIN</i> pseudo-op.
 <PRE>
 CHAIN <i>label</i>
 </PRE>
-Create a 12-nibble subheader containing a subprogram and label chain. If
+Create a 12-nibble sub header containing a subprogram and label chain. If
 there are no subprograms, enter <i>CHAIN -1</i>.
 </P>
 
-<H3>Differences betweed asm71 and the assembler of the HP71-Forth/Assembler Rom </H3>
+<H3>Differences between asm71 and the assembler of the HP71-Forth/Assembler Rom </H3>
 <UL>
 <li>asm71 does not support FORTH primitives</li>
 <li>The length of labels is limited to 6 characters. Extra characters raise a syntax error.</li>
@@ -475,14 +475,14 @@ there are no subprograms, enter <i>CHAIN -1</i>.
 modifier filed with a leading "="</li>
 <li>The depth of expressions in the modifier field is not limited</li>
 <li>asm71 supports the generation of symbol cross reference listings</li>
-<li>The B=B+A and D1=AS opcode opcode errors of the HP-71B Forth/Assembler rom have been fixed in asm71. The other known
-rom errors do not apply to the asm71.</li>
+<li>The B=B+A and D1=AS opcode opcode errors of the HP-71B Forth/Assembler ROM have been fixed in asm71. The other known
+ROM errors do not apply to the asm71.</li>
 </ul>
 
 <H3>Format of the object file </H3>
 
 <p>The LEX or BIN files are generated with a 32 byte LEX file header. The
-following fields of the lex file header are initialized by asm71
+following fields of the LEX file header are initialized by asm71
 (see: HP-IL Interface Owner's Manual, pp. 234):
 </p>
 <PRE>
@@ -499,7 +499,7 @@ Byte  Definition             initialized by asm71
 
 <H3>Error Messages </H3>
 <PRE>
-ascii constant overflow 
+ASCII constant overflow 
 </PRE>
 An ASCII constant is greater than #FFFFF.  
 <PRE>
@@ -571,9 +571,9 @@ The test and branch instructions appear to be separate but combine to form one i
 <PRE>
 hexadecimal constant overflow 
 </PRE>
-A hexadezimal constant is greater than #FFFFF.  
+A hexadecimal constant is greater than #FFFFF.  
 <PRE>
-illegal commandline option 
+illegal command line option 
 </PRE>
 An other option identifier than <i>R</i> or <i>L</i> was used.
 <PRE>
@@ -633,16 +633,16 @@ generate. Check the value of the constant.
 </LI>
 </UL> 
 <PRE>
-mismatched parantheses
+mismatched parentheses
 </PRE>
-The number of left an right parantheses must be equal. At least one right paranthesis is missing.
+The number of left an right parentheses must be equal. At least one right parenthesis is missing.
 <PRE>
 missing/illegal label 
 </PRE>
 Illegal characters appear in a label, or a label required for an EO U instruction is missing. Check that a
 legal label is present.
 <PRE>
-missing/multiple filetype 
+missing/multiple file type 
 </PRE>
 The first line in the source file isn't LEX or BIN (fatal to assembly); or one of these pseudo-
 ops appears a second time; or any pseudo-op of the wrong type appears. 
@@ -657,7 +657,7 @@ non-hexadecimal digit present
 </PRE>
 The modifier field contains illegal characters. Use only hex digits 0 through F.
 <PRE>
-pagesize too small 
+page size too small 
 </PRE>
 The value for the <i>P</i> Option is too small.
 <PRE>
@@ -699,8 +699,8 @@ GNU General Public License for more details.
 </p>
 
 <p>
-The complete text of the GNI General Public License
-can be found on <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>
+The complete text of the GNU General Public License
+Uan be found on <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>
 </p>
 
 </BODY>       
