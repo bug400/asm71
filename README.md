@@ -23,17 +23,16 @@ See the doc/asm71.html file for more information about features and usage.
 Compatibility
 -------------
 
-ASM71 was tested on LINUX, Windows 10 and Mac OS/X.
+ASM71 was tested on LINUX, Windows 10 and macOS.
 
 
 INSTALLATION
 ------------
 
-To compile ASM71 you need the Free Pascal Compiler: http://www.freepascal.org
-for the destination platform. See INSTALL for further details.
 
-The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit),
-Windows (32 bit) and Mac OS/X.
+The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit), Windows (32 bit and 64bit) and MacOS.
+
+See the [Installation Instructions](https://github.com/bug400/asm71/blob/master/INSTALL.md) how to install.
 
 License
 -------

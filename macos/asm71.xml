@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <pkg-ref id="org.bug400.asm71"/>
+    <options customize="never" require-scripts="false"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="org.bug400.asm71"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="org.bug400.asm71" visible="false">
+        <pkg-ref id="org.bug400.asm71"/>
+    </choice>
+    <license mime-type="text/plain" file="LICENSE"/>
+    <welcome mime-type="text/plain" file="welcome.txt"/>
+    <conclusion mime-type="text/plain" file="conclusion.txt"/>
+    <pkg-ref id="org.bug400.asm71" version="0" onConclusion="none">asm71.pkg</pkg-ref>
+</installer-gui-script>

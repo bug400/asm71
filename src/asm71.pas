@@ -3,7 +3,7 @@ program ASM71(input,output);
 {
 
 HP-71 cross assembler
-Copyright  Joachim Siebold   1986,2015
+Copyright  Joachim Siebold   1986,2019
 Developped under Turbo Pascal Version 3.0 1986
 Converted to Turbo Pascal Version 5.0 12/1988
 Converted to FPC Version 0.99 2/1998 (Linux)
@@ -32,21 +32,25 @@ Date        Issue
             B=B+B A opcode had a bad class, flags corrected
 04.05.2015  HP-71 and HP-IL entry points of the areuh
             assembler implemented.
+27.04.2019  Fixed compile issues on Windows 64bit
 }
 
 uses sysutils;
 
 const  NULENT = 8; (* Null entry in opcode table *)
        MAXOPCIND = 42;  (* length of opcode index table *)
-       VERSION = 'Vers 2.03'; (* assembler version *)
+       VERSION = 'Vers 2.04'; (* assembler version *)
 {$ifdef Win32}
-       SYS = '(Windows)';
+       SYS = '(Windows 32bit)';
+{$endif}
+{$ifdef Win64}
+       SYS = '(Windows 64bit)';
 {$endif}
 {$ifdef Unix}
        SYS = '(Unix)';
 {$endif}
-       VERS_DATE= 'March 2015  ';
-       COPYRIGHT= '(C) Copyright J. Siebold 1985-2015';
+       VERS_DATE= 'April 2019  ';
+       COPYRIGHT= '(C) Copyright J. Siebold 1985-2019';
        MAXNUM  = 1048575;
 
 

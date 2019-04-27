@@ -1,3 +1,10 @@
+asm71 (2.0-4ubuntu1) bionic; urgency=medium
+
+  * new cmake build system
+  * documentation updates 
+
+ -- trusty <achim@trillian>  Fri, 26 Apr 2019 08:54:10 +0200
+
 asm71 (2.0-3ubuntu1) trusty; urgency=medium
 
   * entry table of areuh implemented 

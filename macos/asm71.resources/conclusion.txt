@@ -1,0 +1,11 @@
+ASM71 2.0.4 was installed on your system
+
+To uninstall the ASM71 do the following:
+
+Run the script create_asm71_removescript.sh to create an uninstall script:
+bash /usr/local/share/asm71/create_asm71_removescript.sh > uninstall.sh
+
+Run the script uninstall.sh as administrator:
+sudo bash ./uninstall.sh
+
+Due to security reasons each delete operation requires confirmation.

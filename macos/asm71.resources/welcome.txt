@@ -1,0 +1,4 @@
+ASM71 2.0.4
+
+This package installs the ASM71 in the location /usr/local.
+Please uninstall any previously installed version first.
