@@ -35,7 +35,7 @@ the current user. A system-wide installation requires administrator privileges.
 Uninstall ASM71 from the control panel instead.
 
 
-Mac OS:
+macOS:
 
 There is a package that installs the package under /usr/local.
 
@@ -59,11 +59,11 @@ Due to security reasons each delete operation requires confirmation.
 Build from scratch
 ------------------
 
-ASM71 was migrated to the CMake build system. 
+ASM71 was migrated to the CMake build system. The Free Pascal configuration files for CMake were gratefully taken from the [Hedgewars project](https://github.com/hedgewars/hw).
 
 Download the ASM71 source package and follow the instruction in the
 build directories:
 
 * linux: Linux (Debian package tools and Free Pascal compiler)
-* macos: mac OS (XCode command line tools and Free Pascal compiler)
+* macos: macOS (XCode command line tools and Free Pascal compiler)
 * windows (MSVC 2017, Free Pascal Compiler and nsis 3.0 package builder)

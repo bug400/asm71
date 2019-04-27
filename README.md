@@ -30,7 +30,7 @@ INSTALLATION
 ------------
 
 
-The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit), Windows (32 bit and 64bit) and MacOS.
+The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit), Windows (32 bit and 64bit) and macOS.
 
 See the [Installation Instructions](https://github.com/bug400/asm71/blob/master/INSTALL.md) how to install.
 
