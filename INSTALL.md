@@ -22,17 +22,16 @@ Install the package as root.
 Windows:
 
 There are installer exe file to safely install ASM71. Download 
-the appropriate 32 or 64 bit version of the installer file follow the
+the appropriate 32 or 64 bit version of the installer file and follow the
 instructions below.
 
 * Uninstall any previous installed version of ASM71 before installing
 a new version.
 * A 32 bit version of ASM71 will not install on a 64 bit windows
-* you may choose a system-wide installation or an installation only for
+* You may choose a system-wide installation or an installation only for
 the current user. A system-wide installation requires administrator privileges.
-* You may choose to have the installer modify the PATH variable. This is not needed if you call ASM71 from the "ASM71 prompt" in the start menu.
-* The uninstaller fails if issued from "Apps and Features" in Windows 10. 
-Uninstall ASM71 from the control panel instead.
+* You may choose to modify the PATH variable. This is not necessary if you call ASM71 from the "asm71 prompt" in the start menu.
+* It is recommended to uninstall ASM71 from the legacy "program and features" control panel. Uninstalling from the "apps and features " control panel (Windows 10) requires to enter administrator credentials even for a local installation.
 
 
 macOS:
