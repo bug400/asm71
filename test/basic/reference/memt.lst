@@ -1,0 +1,976 @@
+
+ASM71 
+ 
+ 
+0001 00000                  LEX    'MEM'   
+0001 00000 D454D402    NIBASC 'MEM     '    Filename (LIF Directory Entry)
+     00008 02020202
+0001 00010 0202        NIBASC '  '
+0001 00014 2E80        NIBHEX 2E80          File Type is Lex
+0001 00018 00000000    NIBHEX 00000000      ignore File Start Record
+0001 00020 0000        NIBHEX 0000          File length (records)
+0001 00024 00          CON(2) 00
+0001 00026 40          CON(2) 04
+0001 00028 00          CON(2) #00           Date of creation
+0001 0002A 10          CON(2) #01
+0001 0002C 10          CON(2) #01
+0001 0002E 00          CON(2) #00           Time of creation
+0001 00030 00          CON(2) #00
+0001 00032 00          CON(2) #00
+0001 00034 0810        NIBHEX 0810          Volume Flag/Number
+0001 00038 D7700       CON(5) (FiLeNd)-(64) File length (nibbles)
+0001 0003D 000         NIBHEX 000           End of Directory Entry
+0002 00040           ************************************
+0003 00040           *                                  *
+0004 00040           * MEMORY MANAGEMENT LEX FILE       *
+0005 00040           *                                  *
+0006 00040           * (c) SIEBOLD 1984                 *
+0007 00040           *                                  *
+0008 00040           ************************************
+0009 00040                  ID     #5C
+0009 00040 C5          CON(2) #5C
+0009 00042 10          CON(2) 0001
+0009 00044 90          CON(2) 0009
+0009 00046 00000       CON(5) 0
+0009 0004B F           NIBHEX F
+0009 0004C F500        REL(4) 1+TxTbSt
+0010 00050                  MSG    0
+0010 00050 0000        CON(4) 0
+0011 00054                  POLL   POLHND
+0011 00054 2B000       REL(5) POLHND
+0012 00059           *
+0013 00059                  ENTRY  ANZ
+0013 00059             ***MAIN TABLE***
+0013 00059 000         CON(3) (TxEn01)-(TxTbSt)
+0013 0005C 1A600       REL(5) ANZ
+0014 00061                  CHAR   #F
+0014 00061 F           CON(1) #F
+0015 00062                  ENTRY  DEL
+0015 00062 B00         CON(3) (TxEn02)-(TxTbSt)
+0015 00065 F3400       REL(5) DEL
+0016 0006A                  CHAR   #C
+0016 0006A C           CON(1) #C
+0017 0006B                  ENTRY  GET
+0017 0006B 410         CON(3) (TxEn03)-(TxTbSt)
+0017 0006E D0400       REL(5) GET
+0018 00073                  CHAR   #C
+0018 00073 C           CON(1) #C
+0019 00074                  ENTRY  MAX
+0019 00074 D10         CON(3) (TxEn04)-(TxTbSt)
+0019 00077 AA600       REL(5) MAX
+0020 0007C                  CHAR   #F
+0020 0007C F           CON(1) #F
+0021 0007D                  ENTRY  NEWK
+0021 0007D 820         CON(3) (TxEn05)-(TxTbSt)
+
+Page 0002         
+HP-71 Assembler   
+ 
+0021 00080 37500       REL(5) NEWK
+0022 00085                  CHAR   #C
+0022 00085 C           CON(1) #C
+0023 00086                  ENTRY  OUT
+0023 00086 330         CON(3) (TxEn06)-(TxTbSt)
+0023 00089 EB400       REL(5) OUT
+0024 0008E                  CHAR   #C
+0024 0008E C           CON(1) #C
+0025 0008F                  ENTRY  PURK
+0025 0008F C30         CON(3) (TxEn07)-(TxTbSt)
+0025 00092 E3600       REL(5) PURK
+0026 00097                  CHAR   #C
+0026 00097 C           CON(1) #C
+0027 00098                  ENTRY  PUT 
+0027 00098 740         CON(3) (TxEn08)-(TxTbSt)
+0027 0009B 26400       REL(5) PUT
+0028 000A0                  CHAR   #C
+0028 000A0 C           CON(1) #C
+0029 000A1                  ENTRY  UPD 
+0029 000A1 050         CON(3) (TxEn09)-(TxTbSt)
+0029 000A4 C1500       REL(5) UPD
+0030 000A9                  CHAR   #C
+0030 000A9 C           CON(1) #C
+0031 000AA           *
+0032 000AA                  KEY    'ANZ?'
+0032 000AA             ***TEXT TABLE***
+0032 000AA           TxTbSt
+0032 000AA           TxEn01
+0032 000AA 7           CON(1) 07
+0032 000AB 14E4A5F3    NIBASC 'ANZ?'
+0033 000B3                  TOKEN  1
+0033 000B3 10          CON(2) 1
+0034 000B5                  KEY    'DEL'
+0034 000B5           TxEn02
+0034 000B5 5           CON(1) 05
+0034 000B6 4454C4      NIBASC 'DEL'
+0035 000BC                  TOKEN  2
+0035 000BC 20          CON(2) 2
+0036 000BE                  KEY    'GET'
+0036 000BE           TxEn03
+0036 000BE 5           CON(1) 05
+0036 000BF 745445      NIBASC 'GET'
+0037 000C5                  TOKEN  3
+0037 000C5 30          CON(2) 3
+0038 000C7                  KEY    'MAX?'
+0038 000C7           TxEn04
+0038 000C7 7           CON(1) 07
+0038 000C8 D41485F3    NIBASC 'MAX?'
+0039 000D0                  TOKEN  4
+0039 000D0 40          CON(2) 4
+0040 000D2                  KEY    'NEWK'
+0040 000D2           TxEn05
+0040 000D2 7           CON(1) 07
+0040 000D3 E45475B4    NIBASC 'NEWK'
+0041 000DB                  TOKEN  5
+0041 000DB 50          CON(2) 5
+0042 000DD                  KEY    'OUT'
+0042 000DD           TxEn06
+0042 000DD 5           CON(1) 05
+0042 000DE F45545      NIBASC 'OUT'
+
+Page 0003         
+HP-71 Assembler   
+ 
+0043 000E4                  TOKEN  6
+0043 000E4 60          CON(2) 6
+0044 000E6                  KEY    'PURK'
+0044 000E6           TxEn07
+0044 000E6 7           CON(1) 07
+0044 000E7 055525B4    NIBASC 'PURK'
+0045 000EF                  TOKEN  7
+0045 000EF 70          CON(2) 7
+0046 000F1                  KEY    'PUT'
+0046 000F1           TxEn08
+0046 000F1 5           CON(1) 05
+0046 000F2 055545      NIBASC 'PUT'
+0047 000F8                  TOKEN  8
+0047 000F8 80          CON(2) 8
+0048 000FA                  KEY    'UPD'
+0048 000FA           TxEn09
+0048 000FA 5           CON(1) 05
+0048 000FB 550544      NIBASC 'UPD'
+0049 00101                  TOKEN  9
+0049 00101 90          CON(2) 9
+0050 00103                  ENDTXT
+0050 00103 1FF         NIBHEX 1FF
+0051 00106           *
+0052 00106           PARERR EQU    #02F08
+0053 00106           MGOSUB EQU    #1AF01
+0054 00106           EOLCK  EQU    #02A7E
+0055 00106           VARP   EQU    #0350E
+0056 00106           NTOKEN EQU    #0493B
+0057 00106           DROPDC EQU    #05470
+0058 00106           NXTSTM EQU    #08A48
+0059 00106           HEXDEC EQU    #0ECAF
+0060 00106           DCHXW  EQU    #0ECDC
+0061 00106           BSERR  EQU    #0939A
+0062 00106           FLGREG EQU    #2F6E9
+0063 00106           UPDANN EQU    #13571
+0064 00106           A-MULT EQU    #1B349
+0065 00106           FILEF  EQU    #09FB0
+0066 00106           RJUST  EQU    #12AE2
+0067 00106           FLOAT  EQU    #1B322
+0068 00106           ADDRSS EQU    #0F527
+0069 00106           OBCOLL EQU    #01435
+0070 00106           RESPTR EQU    #03172
+0071 00106           PRGFMF EQU    #0A146
+0072 00106           FLTDH  EQU    #1B223
+0073 00106           OUTEL1 EQU    #05300
+0074 00106           FIXDC  EQU    #05493
+0075 00106           FIXP   EQU    #02A6E
+0076 00106           EXPEX- EQU    #0F178
+0077 00106           D1MSTK EQU    #1954E
+0078 00106           POP1R  EQU    #0E8FD
+0079 00106           EXPR   EQU    #0F23C
+0080 00106           CRETF+ EQU    #084C4
+0081 00106           HDFLT  EQU    #1B31B
+0082 00106           HXDCW  EQU    #0ECB4
+0083 00106           *
+0084 00106           VNRa   EQU    #2F881 STORE IN STATEMENT SCRATCH
+0085 00106           VRa    EQU    #2F886
+0086 00106           VHa    EQU    #2F88B
+0087 00106           *
+0088 00106           * POLLHANDLER
+
+Page 0004         
+HP-71 Assembler   
+ 
+0089 00106           *
+0090 00106 969       POLHND ?B=0   B
+0091 00109 50               GOYES  POLANF
+0092 0010B 503              GONC   POLEND
+0093 0010E 11B       POLANF C=R3
+0094 00111 135              D1=C
+0095 00114 112              A=R2
+0096 00117 1CD              D1=D1- (VER$en)-(VER$st)-2
+0097 0011A 137              CD1EX
+0098 0011D 8B6              ?A>C   A
+0099 00120 C1               GOYES  POLEND 
+0100 00122 135              D1=C
+0101 00125 10B              R3=C
+0102 00128 3D1413A3  VER$st LCASC  ' MEM:1A'
+     00130 D454D402
+0103 00138 15DD      VER$en DAT1=C (VER$en)-(VER$st)-2
+0104 0013C 00        POLEND RTNSXM
+0105 0013E           *
+0106 0013E           *  MEM PARSE ROUTINES
+0107 0013E           *
+0108 0013E           GETp
+0109 0013E           PUTp
+0110 0013E           OUTp
+0111 0013E 7930      UPDp   GOSUB  PVAR
+0112 00142 566              GONC   ERR1
+0113 00145 7230             GOSUB  PVAR
+0114 00149 5F5              GONC   ERR1
+0115 0014C 8FE0530   DELp   GOSBVL VARP
+0116 00153 4C0              GOC    JMP51
+0117 00156 333500           LC(4)  #0053
+0118 0015C 6C40             GOTO   ERR1
+0119 00160 8FE7A20   JMP51  GOSBVL EOLCK
+0120 00167 4C0              GOC    JMP52
+0121 0016A 33B400           LC(4)  #004B
+0122 00170 6830             GOTO   ERR1
+0123 00174 8D27130   JMP52  GOVLNG RESPTR
+0124 0017B           *
+0125 0017B           *
+0126 0017B 8FE0530   PVAR   GOSBVL VARP
+0127 00182 5C1              GONC   ILLPAR
+0128 00185 8FB3940          GOSBVL NTOKEN
+0129 0018C 20               P=     0
+0130 0018E 311F             LCHEX  #F1
+0131 00192 962              ?A=C   B
+0132 00195 21               GOYES  END1
+0133 00197 33B400           LC(4)  #004B
+0134 0019D 03               RTNCC
+0135 0019F 333500    ILLPAR LC(4)  #0053
+0136 001A5 03               RTNCC
+0137 001A7 02        END1   RTNSC
+0138 001A9           *
+0139 001A9 854       ERR1   ST=1   4
+0140 001AC 136              CD0EX
+0141 001AF 180              D0=D0- 1
+0142 001B2 8D80F20          GOVLNG PARERR
+0143 001B9           *
+0144 001B9           *  MEM DECOMPILE ROUTINES
+0145 001B9           *
+0146 001B9           GETd
+0147 001B9           PUTd
+
+Page 0005         
+HP-71 Assembler   
+ 
+0148 001B9           DELd
+0149 001B9           OUTd
+0150 001B9 8D07450   UPDd   GOVLNG DROPDC
+0151 001C0           *
+0152 001C0           *
+0153 001C0           * FILE PARSE ROUTINES
+0154 001C0           *
+0155 001C0 8DE6A20   NEWKp  GOVLNG FIXP
+0156 001C7 8FE7A20   PURKp  GOSBVL EOLCK
+0157 001CE 8D27130          GOVLNG RESPTR
+0158 001D5           *
+0159 001D5           * FILE DECOMPILE ROUTINES
+0160 001D5           *
+0161 001D5 8D39450   NEWKd  GOVLNG FIXDC
+0162 001DC 8D00350   PURKd  GOVLNG OUTEL1
+0163 001E3           *
+0164 001E3           *
+0165 001E3           *
+0166 001E3           * INIT: EXECUTE PARAMETER LIST
+0167 001E3           *
+0168 001E3 04        INITD  SETHEX
+0169 001E5 8F53410          GOSBVL OBCOLL
+0170 001EC 20               P=     0
+0171 001EE 1F188F2          D1=(5) VNRa
+0172 001F5 6130             GOTO   INIT1
+0173 001F9           *
+0174 001F9 04        INIT   SETHEX
+0175 001FB 8F53410          GOSBVL OBCOLL
+0176 00202 20               P=     0
+0177 00204 1F188F2          D1=(5) VNRa
+0178 0020B 7FB0             GOSUB  GETADR
+0179 0020F 500              RTNNC
+0180 00212 1F688F2          D1=(5) VRa
+0181 00219 71B0             GOSUB  GETADR
+0182 0021D 500              RTNNC
+0183 00220 1FB88F2          D1=(5) VHa
+0184 00227           INIT1
+0185 00227 73A0             GOSUB  GETADR
+0186 0022B 500              RTNNC
+0187 0022E           *
+0188 0022E           * CLEAR ERROR FLAG (0)
+0189 0022E           *
+0190 0022E 20               P=     0
+0191 00230 1F9E6F2          D1=(5) FLGREG
+0192 00237 1530             A=DAT1 P
+0193 0023B 30E              LCHEX  #E
+0194 0023E 0E06             A=A&C  P
+0195 00242 1510             DAT1=A P
+0196 00246 8F17531          GOSBVL UPDANN
+0197 0024D           *
+0198 0024D           * LOOK FOR KOORD FILE
+0199 0024D           *
+0200 0024D 3FA7A7A7         LCASC  'zzzzzzzz'
+     00255 A7A7A7A7
+     0025D A0      
+0201 0025F AFA              A=C    W
+0202 00262 8F0BF90          GOSBVL FILEF
+0203 00269 540              GONC   JMP53
+0204 0026C 03               RTNCC
+0205 0026E 133       JMP53  AD1EX
+
+Page 0006         
+HP-71 Assembler   
+ 
+0206 00271 D2               C=0    A
+0207 00273 3152             LCHEX  #25
+0208 00277 04               SETHEX
+0209 00279 CA               A=A+C  A
+0210 0027B 103              R3=A
+0211 0027E 02               RTNSC
+0212 00280           *
+0213 00280           * LOOK FOR N IN FILE
+0214 00280           *
+0215 00280 1B188F2   FIND   D0=(5) VNRa
+0216 00287 142              A=DAT0 A
+0217 0028A 132              AD0EX
+0218 0028D 1527             A=DAT0 W
+0219 00291 7670             GOSUB  NFD
+0220 00295 104              R4=A   
+0221 00298 11B              C=R3
+0222 0029B 136              CD0EX
+0223 0029E 146              C=DAT0 A
+0224 002A1 D7               D=C    A
+0225 002A3 169              D0=D0+ 10
+0226 002A6 8AB       LOOP   ?D=0   A
+0227 002A9 91               GOYES  ENDF
+0228 002AB CF               D=D-1  A
+0229 002AD 27               P=     7
+0230 002AF 1561             C=DAT0 WP
+0231 002B3 912              ?A=C   WP
+0232 002B6 01               GOYES  FOUND
+0233 002B8 16F              D0=D0+ 16
+0234 002BB 169              D0=D0+ 10
+0235 002BE 67EF             GOTO   LOOP
+0236 002C2           *
+0237 002C2 D0        ENDF   A=0    A
+0238 002C4 01               RTN
+0239 002C6 132       FOUND  AD0EX
+0240 002C9 130              D0=A
+0241 002CC 01               RTN
+0242 002CE           *
+0243 002CE           *
+0244 002CE 8F725F0   GETADR GOSBVL ADDRSS
+0245 002D5 491              GOC    ILLVAR
+0246 002D8 132              AD0EX
+0247 002DB 141              DAT1=A A
+0248 002DE 133              AD1EX
+0249 002E1 20               P=     0
+0250 002E3 1530             A=DAT1 P
+0251 002E7 30A              LCHEX  #A
+0252 002EA 982              ?A<C   P
+0253 002ED A0               GOYES  JMP54
+0254 002EF 33B000    ILLVAR LC(4)  #000B
+0255 002F5 03               RTNCC
+0256 002F7 02        JMP54  RTNSC
+0257 002F9           *
+0258 002F9           * CONVERSION ROUTINES
+0259 002F9           *
+0260 002F9 842       FFD    ST=0   2
+0261 002FC 05               SETDEC
+0262 002FE B34              A=A+1  X
+0263 00301 B34              A=A+1  X
+0264 00304 B34              A=A+1  X
+0265 00307 6600             GOTO   JMP20
+
+Page 0007         
+HP-71 Assembler   
+ 
+0266 0030B 852       NFD    ST=1   2
+0267 0030E 04        JMP20  SETHEX
+0268 00310 841              ST=0   1
+0269 00313 948              ?A=0   S
+0270 00316 80               GOYES  JMP21
+0271 00318 851              ST=1   1
+0272 0031B AC0              A=0    S
+0273 0031E 8F2EA21   JMP21  GOSBVL RJUST
+0274 00325 AF6              C=A    W
+0275 00328 8FCDCE0          GOSBVL DCHXW
+0276 0032F 861              ?ST=0  1
+0277 00332 21               GOYES  JMP23
+0278 00334 28               P=     8
+0279 00336 862              ?ST=0  2
+0280 00339 40               GOYES  JMP22
+0281 0033B 27               P=     7
+0282 0033D 308       JMP22  LCHEX  #8
+0283 00340 0E0E             A=A!C  P
+0284 00344 20        JMP23  P=     0
+0285 00346 842              ST=0   2
+0286 00349 841              ST=0   1
+0287 0034C 04               SETHEX
+0288 0034E 01               RTN
+0289 00350           *
+0290 00350 842       FDF    ST=0   2
+0291 00353 28               P=     8
+0292 00355 6800             GOTO   JMP25
+0293 00359 852       NDF    ST=1   2
+0294 0035C 27               P=     7
+0295 0035E 308       JMP25  LCHEX  #8
+0296 00361 0E02             C=C&A  P
+0297 00365 841              ST=0   1
+0298 00368 90A              ?C=0   P
+0299 0036B C0               GOYES  JMP26
+0300 0036D 307              LCHEX  #7
+0301 00370 0E06             A=A&C  P
+0302 00374 851              ST=1   1
+0303 00377 20        JMP26  P=     0
+0304 00379 AF6              C=A    W
+0305 0037C 8F4BCE0          GOSBVL HXDCW
+0306 00383 8F223B1          GOSBVL FLOAT
+0307 0038A 861              ?ST=0  1
+0308 0038D F0               GOYES  JMP27
+0309 0038F 2F               P=     15
+0310 00391 309              LCHEX  #9
+0311 00394 20               P=     0
+0312 00396 ACA              A=C    S
+0313 00399 841              ST=0   1
+0314 0039C 872       JMP27  ?ST=1  2
+0315 0039F B0               GOYES  JMP28
+0316 003A1 A3C              A=A-1  X
+0317 003A4 A3C              A=A-1  X
+0318 003A7 A3C              A=A-1  X
+0319 003AA 842       JMP28  ST=0   2
+0320 003AD 20               P=     0
+0321 003AF 04               SETHEX
+0322 003B1 01               RTN
+0323 003B3           *
+0324 003B3           * STORE R,H INTO FILE
+0325 003B3           *
+
+Page 0008         
+HP-71 Assembler   
+ 
+0326 003B3 1F688F2   INRH   D1=(5) VRa
+0327 003BA 7210             GOSUB  PUTF
+0328 003BE 168              D0=D0+ 9
+0329 003C1 1FB88F2          D1=(5) VHa
+0330 003C8 7400             GOSUB  PUTF
+0331 003CC 20               P=     0
+0332 003CE 01               RTN
+0333 003D0 143       PUTF   A=DAT1 A
+0334 003D3 133              AD1EX
+0335 003D6 1537             A=DAT1 W
+0336 003DA 7B1F             GOSUB  FFD
+0337 003DE 28               P=     8
+0338 003E0 1501             DAT0=A WP
+0339 003E4 01               RTN
+0340 003E6           *
+0341 003E6           * GET R,H FROM FILE
+0342 003E6           *
+0343 003E6 1F688F2   OUTRH  D1=(5) VRa
+0344 003ED 7210             GOSUB  GETF
+0345 003F1 168              D0=D0+ 9
+0346 003F4 1FB88F2          D1=(5) VHa
+0347 003FB 7400             GOSUB  GETF
+0348 003FF 20               P=     0
+0349 00401 01               RTN
+0350 00403 28        GETF   P=     8
+0351 00405 AF0              A=0    W
+0352 00408 1521             A=DAT0 WP
+0353 0040C 20               P=     0
+0354 0040E 7E3F             GOSUB  FDF
+0355 00412 147              C=DAT1 A
+0356 00415 137              CD1EX
+0357 00418 1517             DAT1=A W
+0358 0041C 01               RTN
+0359 0041E           *
+0360 0041E           * FULCHK: CHECK FILE OVERFLOW
+0361 0041E           *
+0362 0041E 04        FULCHK SETHEX
+0363 00420 11B              C=R3
+0364 00423 137              CD1EX
+0365 00426 143              A=DAT1 A
+0366 00429 174              D1=D1+ 5
+0367 0042C 147              C=DAT1 A
+0368 0042F 8A6              ?A#C   A
+0369 00432 70               GOYES  INCNP
+0370 00434 851              ST=1   1
+0371 00437 01               RTN
+0372 00439 E4        INCNP  A=A+1  A
+0373 0043B 1C4              D1=D1- 5
+0374 0043E 141              DAT1=A A
+0375 00441 01               RTN
+0376 00443           *
+0377 00443           * ENDADR: COMP ADDR OF LAST ELEMENT
+0378 00443           *
+0379 00443 11B       ENDADR C=R3
+0380 00446 137              CD1EX
+0381 00449 143              A=DAT1 A
+0382 0044C           *
+0383 0044C           * ADR: COMPUTE ELEMENT ADR
+0384 0044C           *
+0385 0044C 04        ADR    SETHEX
+
+Page 0009         
+HP-71 Assembler   
+ 
+0386 0044E CC               A=A-1  A
+0387 00450 20               P=     0
+0388 00452 34A1000          LCHEX  #0001A
+0389 00459 8F943B1          GOSBVL A-MULT
+0390 00460 11B              C=R3
+0391 00463 CA               A=A+C  A
+0392 00465 132              AD0EX
+0393 00468 169              D0=D0+ 10
+0394 0046B 01               RTN
+0395 0046D           *
+0396 0046D 6813      ERR2   GOTO   bserr
+0397 00471           *
+0398 00471           * GET
+0399 00471           *
+0400 00471 84DFF            REL(5) GETd
+0401 00476 8CCFF            REL(5) GETp
+0402 0047B 7A7D      GET    GOSUB  INIT
+0403 0047F 5DE              GONC   ERR2
+0404 00482 7AFD             GOSUB  FIND
+0405 00486 8AC              ?A#0   A
+0406 00489 60               GOYES  JMP1
+0407 0048B 6103             GOTO   NOEX
+0408 0048F 167       JMP1   D0=D0+ 8
+0409 00492 705F             GOSUB  OUTRH
+0410 00496 6813             GOTO   EXIT
+0411 0049A           *
+0412 0049A           * DEL
+0413 0049A           *
+0414 0049A F1DFF            REL(5) DELd
+0415 0049F DACFF            REL(5) DELp
+0416 004A4 7B3D      DEL    GOSUB  INITD
+0417 004A8 54C              GONC   ERR2
+0418 004AB 71DD             GOSUB  FIND
+0419 004AF 8AC              ?A#0   A
+0420 004B2 60               GOYES  JMP2
+0421 004B4 68D2             GOTO   NOEX
+0422 004B8 100       JMP2   R0=A
+0423 004BB 748F             GOSUB  ENDADR
+0424 004BF 110              A=R0
+0425 004C2 133              AD1EX
+0426 004C5 1527             A=DAT0 W
+0427 004C9 1517             DAT1=A W
+0428 004CD 29               P=     9 
+0429 004CF 16F              D0=D0+ 16
+0430 004D2 17F              D1=D1+ 16
+0431 004D5 1521             A=DAT0 WP
+0432 004D9 1511             DAT1=A WP
+0433 004DD 20               P=     0
+0434 004DF 11B              C=R3
+0435 004E2 137              CD1EX
+0436 004E5 04               SETHEX
+0437 004E7 147              C=DAT1 A
+0438 004EA CE               C=C-1  A
+0439 004EC 145              DAT1=C A
+0440 004EF 6FB2             GOTO   EXIT
+0441 004F3           *
+0442 004F3           * PUT
+0443 004F3           *
+0444 004F3 6CCFF            REL(5) PUTd
+0445 004F8 64CFF            REL(5) PUTp
+
+Page 0010         
+HP-71 Assembler   
+ 
+0446 004FD 78FC      PUT    GOSUB  INIT
+0447 00501 573              GONC   ERR4
+0448 00504 787D             GOSUB  FIND
+0449 00508 8A8              ?A=0   A
+0450 0050B 60               GOYES  JMP3
+0451 0050D 6F72             GOTO   DUP
+0452 00511 841       JMP3   ST=0   1
+0453 00514 760F             GOSUB  FULCHK
+0454 00518 861              ?ST=0  1
+0455 0051B 60               GOYES  JMP5
+0456 0051D 6F62             GOTO   FULL
+0457 00521 7E1F      JMP5   GOSUB  ENDADR
+0458 00525 11C              C=R4
+0459 00528 27               P=     7
+0460 0052A 1541             DAT0=C WP
+0461 0052E 167              D0=D0+ 8
+0462 00531 7E7E             GOSUB  INRH
+0463 00535 6972             GOTO   EXIT
+0464 00539           *
+0465 00539 6C42      ERR4   GOTO   bserr
+0466 0053D           *
+0467 0053D           * OUT
+0468 0053D           *
+0469 0053D C7CFF            REL(5) OUTd
+0470 00542 CFBFF            REL(5) OUTp
+0471 00547 7EAC      OUT    GOSUB  INIT
+0472 0054B 5DE              GONC   ERR4
+0473 0054E 1F188F2          D1=(5) VNRa
+0474 00555 143              A=DAT1 A
+0475 00558 133              AD1EX
+0476 0055B 1537             A=DAT1 W
+0477 0055F 8F2EA21          GOSBVL RJUST
+0478 00566 AF6              C=A    W
+0479 00569 8FCDCE0          GOSBVL DCHXW
+0480 00570 11B              C=R3
+0481 00573 137              CD1EX
+0482 00576 147              C=DAT1 A
+0483 00579 8B6              ?A>C   A
+0484 0057C 63               GOYES  OFR
+0485 0057E 8A8              ?A=0   A
+0486 00581 13               GOYES  OFR
+0487 00583 75CE             GOSUB  ADR
+0488 00587 27               P=     7
+0489 00589 AF0              A=0    W
+0490 0058C 1521             A=DAT0 WP
+0491 00590 20               P=     0
+0492 00592 73CD             GOSUB  NDF
+0493 00596 1F188F2          D1=(5) VNRa
+0494 0059D 147              C=DAT1 A
+0495 005A0 137              CD1EX
+0496 005A3 1517             DAT1=A W
+0497 005A7 167              D0=D0+ 8
+0498 005AA 783E             GOSUB  OUTRH
+0499 005AE 6002             GOTO   EXIT
+0500 005B2 6AD1      OFR    GOTO   NOEX
+0501 005B6           *
+0502 005B6           * UPD
+0503 005B6           *
+0504 005B6 30CFF            REL(5) UPDd
+0505 005BB 38BFF            REL(5) UPDp
+
+Page 0011         
+HP-71 Assembler   
+ 
+0506 005C0 753C      UPD    GOSUB  INIT
+0507 005C4 502              GONC   ERR3
+0508 005C7 75BC             GOSUB  FIND
+0509 005CB 8AC              ?A#0   A
+0510 005CE 60               GOYES  JMP4
+0511 005D0 6CB1             GOTO   NOEX
+0512 005D4 167       JMP4   D0=D0+ 8
+0513 005D7 78DD             GOSUB  INRH
+0514 005DB 63D1             GOTO   EXIT
+0515 005DF           *
+0516 005DF 33B000    INVARG LC(4)  #000B
+0517 005E5 60A1      ERR3   GOTO   bserr
+0518 005E9           *
+0519 005E9           * NEWK  CREATE NEW KOORDFILE
+0520 005E9           *
+0521 005E9 CEBFF            REL(5) NEWKd
+0522 005EE 2DBFF            REL(5) NEWKp
+0523 005F3 8F53410   NEWK   GOSBVL OBCOLL
+0524 005FA 8F10FA1          GOSBVL MGOSUB
+0525 00601 871F0            CON(5) EXPEX-
+0526 00606 8FE4591          GOSBVL D1MSTK
+0527 0060D 8FDF8E0          GOSBVL POP1R
+0528 00614 8F322B1          GOSBVL FLTDH
+0529 0061B 53C              GONC   INVARG
+0530 0061E 20               P=     0
+0531 00620 3410000          LCHEX  #00001
+0532 00627 8B2              ?A<C   A
+0533 0062A 5B               GOYES  INVARG
+0534 0062C 102              R2=A
+0535 0062F 7821      NEWK1  GOSUB  FINDF
+0536 00633 871              ?ST=1  1
+0537 00636 51               GOYES  NOPURG
+0538 00638 8F10FA1          GOSBVL MGOSUB
+0539 0063F 641A0            CON(5) PRGFMF
+0540 00644 5AE              GONC   NEWK1
+0541 00647 6C31             GOTO   PRGERR
+0542 0064B           *
+0543 0064B 112       NOPURG A=R2
+0544 0064E 20               P=     0
+0545 00650 34A1000          LCHEX  #0001A
+0546 00657 8F943B1          GOSBVL A-MULT
+0547 0065E 3473000          LCHEX  #00037
+0548 00665 C2               C=C+A  A
+0549 00667 AC3              D=0    S
+0550 0066A 8F10FA1          GOSBVL MGOSUB
+0551 00671 4C480            CON(5) CRETF+
+0552 00676 560              GONC   JMP12
+0553 00679 6A01             GOTO   CRTERR
+0554 0067D 119       JMP12  C=R1
+0555 00680 136              CD0EX
+0556 00683 3FA7A7A7         LCASC  'zzzzzzzz'
+     0068B A7A7A7A7
+     00693 A0      
+0557 00695 1547             DAT0=C W
+0558 00699 16F              D0=D0+ 16
+0559 0069C 20               P=     0
+0560 0069E 350F0E01         LCHEX  #10E0F0
+0561 006A6 25               P=     5
+0562 006A8 1541             DAT0=C WP
+0563 006AC 20               P=     0
+
+Page 0012         
+HP-71 Assembler   
+ 
+0564 006AE 16F              D0=D0+ 16
+0565 006B1 164              D0=D0+ 5
+0566 006B4 D2               C=0    A
+0567 006B6 144              DAT0=C A
+0568 006B9 164              D0=D0+ 5
+0569 006BC 11A              C=R2
+0570 006BF 144              DAT0=C A
+0571 006C2 6CE0             GOTO   EXIT
+0572 006C6           *
+0573 006C6           * PURK PURGE KOORD FILE
+0574 006C6           *
+0575 006C6 61BFF            REL(5) PURKd
+0576 006CB CFAFF            REL(5) PURKp
+0577 006D0 8F53410   PURK   GOSBVL OBCOLL
+0578 006D7 7080             GOSUB  FINDF
+0579 006DB 861              ?ST#1  1
+0580 006DE 60               GOYES  JMP13
+0581 006E0 63A0             GOTO   FNDERR
+0582 006E4 8F10FA1   JMP13  GOSBVL MGOSUB
+0583 006EB 641A0            CON(5) PRGFMF
+0584 006F0 560              GONC   JMP14
+0585 006F3 6090             GOTO   PRGERR
+0586 006F7 67B0      JMP14  GOTO   EXIT
+0587 006FB           *
+0588 006FB           * ANZ? GET NO OF KOORDS STORED
+0589 006FB           *
+0590 006FB 00               NIBHEX 00
+0591 006FD 137       ANZ    CD1EX
+0592 00700 06               RSTK=C
+0593 00702 7550             GOSUB  FINDF
+0594 00706 861              ?ST#1  1
+0595 00709 60               GOYES  JMP15
+0596 0070B 6870             GOTO   FNDERR
+0597 0070F 17F       JMP15  D1=D1+ 16
+0598 00712 17F              D1=D1+ 16
+0599 00715 174              D1=D1+ 5
+0600 00718 143              A=DAT1 A
+0601 0071B 6520             GOTO   RETURN
+0602 0071F           *
+0603 0071F           * MAX? GET MAX NO OF KOORDS
+0604 0071F           *
+0605 0071F 00               NIBHEX 00
+0606 00721 137       MAX    CD1EX
+0607 00724 06               RSTK=C
+0608 00726 7130             GOSUB  FINDF
+0609 0072A 861              ?ST#1  1
+0610 0072D 80               GOYES  JMP16
+0611 0072F D0               A=0    A
+0612 00731 6F00             GOTO   RETURN
+0613 00735 17F       JMP16  D1=D1+ 16
+0614 00738 17F              D1=D1+ 16
+0615 0073B 179              D1=D1+ 10
+0616 0073E 143              A=DAT1 A
+0617 00741           *
+0618 00741 8FB13B1   RETURN GOSBVL HDFLT
+0619 00748 07               C=RSTK
+0620 0074A 137              CD1EX
+0621 0074D 1CF              D1=D1- 16
+0622 00750 1517             DAT1=A W
+0623 00754 8DC32F0          GOVLNG EXPR  
+
+Page 0013         
+HP-71 Assembler   
+ 
+0624 0075B           *
+0625 0075B 841       FINDF  ST=0   1
+0626 0075E 3FA7A7A7         LCASC  'zzzzzzzz'
+     00766 A7A7A7A7
+     0076E A0      
+0627 00770 AFA              A=C    W
+0628 00773 20               P=     0
+0629 00775 8F0BF90          GOSBVL FILEF
+0630 0077C 500              RTNNC
+0631 0077F 851              ST=1   1
+0632 00782 01               RTN
+0633 00784           *
+0634 00784           FNDERR
+0635 00784           PRGERR
+0636 00784 20        CRTERR P=     0
+0637 00786 8DA9390   bserr  GOVLNG BSERR
+0638 0078D           *
+0639 0078D           *
+0640 0078D           *
+0641 0078D           *
+0642 0078D           * ERROR HANDLER
+0643 0078D           *
+0644 0078D           NOEX 
+0645 0078D           FULL  
+0646 0078D 04        DUP    SETHEX
+0647 0078F 20               P=     0
+0648 00791 1F9E6F2          D1=(5) FLGREG
+0649 00798 1530             A=DAT1 P
+0650 0079C 3110             LCHEX  #01
+0651 007A0 0E0E             A=A!C  P
+0652 007A4 1510             DAT1=A P
+0653 007A8 8F17531          GOSBVL UPDANN
+0654 007AF           *
+0655 007AF           * FINITO
+0656 007AF           *
+0657 007AF           EXIT
+0658 007AF 8F53410          GOSBVL OBCOLL
+0659 007B6 8D84A80          GOVLNG NXTSTM
+0660 007BD                  END
+
+Page 0014         
+HP-71 Assembler   **** SYMBOL TABLE *****
+ 
+A-MULT  Abs    11143 #1B349 -    64   389   546
+ADDRSS  Abs     6275 #0F527 -    68   244
+ADR     Rel      110 #0044C -   385   487
+ANZ     Rel      178 #006FD -    13   591
+BSERR   Abs     3778 #0939A -    61   637
+CRETF+  Abs     3398 #084C4 -    80   551
+CRTERR  Rel      192 #00784 -   553   636
+D1MSTK  Abs    10375 #1954E -    77   526
+DCHXW   Abs     6063 #0ECDC -    60   275   479
+DEL     Rel      118 #004A4 -    15   416
+DELd    Rel       44 #001B9 -   148   414
+DELp    Rel       33 #0014C -   115   415
+DROPDC  Abs     2161 #05470 -    57   150
+DUP     Rel      193 #0078D -   451   646
+END1    Rel       42 #001A7 -   132   137
+ENDADR  Rel      109 #00443 -   379   423   457
+ENDF    Rel       70 #002C2 -   227   237
+EOLCK   Abs     1087 #02A7E -    54   119   156
+ERR1    Rel       42 #001A9 -   112   114   118   122   139
+ERR2    Rel      113 #0046D -   396   403   417
+ERR3    Rel      150 #005E5 -   507   517
+ERR4    Rel      133 #00539 -   447   465   472
+EXIT    Rel      196 #007AF -   410   440   463   499   514   571   586   657
+EXPEX-  Abs     6181 #0F178 -    76   525
+EXPR    Abs     6201 #0F23C -    79   623
+FDF     Rel       84 #00350 -   290   354
+FFD     Rel       76 #002F9 -   260   336
+FILEF   Abs     4088 #09FB0 -    65   202   629
+FIND    Rel       64 #00280 -   215   404   418   448   508
+FINDF   Rel      188 #0075B -   535   578   593   608   625
+FIXDC   Abs     2165 #05493 -    74   161
+FIXP    Abs     1086 #02A6E -    75   155
+FLGREG  Abs    19428 #2F6E9 -    62   191   648
+FLOAT   Abs    11139 #1B322 -    67   306
+FLTDH   Abs    11113 #1B223 -    72   528
+FNDERR  Rel      192 #00784 -   581   596   634
+FOUND   Rel       71 #002C6 -   232   239
+FULCHK  Rel      105 #0041E -   362   453
+FULL    Rel      193 #0078D -   456   645
+FiLeNd  Rel      198 #007BD -     1
+GET     Rel      114 #0047B -    17   402
+GETADR  Rel       71 #002CE -   178   181   185   244
+GETF    Rel      102 #00403 -   344   347   350
+GETd    Rel       44 #001B9 -   146   400
+GETp    Rel       31 #0013E -   108   401
+HDFLT   Abs    11138 #1B31B -    81   618
+HEXDEC  Abs     6059 #0ECAF -    59
+HXDCW   Abs     6059 #0ECB4 -    82   305
+ILLPAR  Rel       41 #0019F -   127   135
+ILLVAR  Rel       75 #002EF -   245   254
+INCNP   Rel      108 #00439 -   369   372
+INIT    Rel       50 #001F9 -   174   402   446   471   506
+INIT1   Rel       55 #00227 -   172   184
+INITD   Rel       48 #001E3 -   168   416
+INRH    Rel       94 #003B3 -   326   462   513
+INVARG  Rel      150 #005DF -   516   529   533
+JMP1    Rel      116 #0048F -   406   408
+JMP12   Rel      166 #0067D -   552   554
+JMP13   Rel      176 #006E4 -   580   582
+JMP14   Rel      178 #006F7 -   584   586
+
+Page 0015         
+HP-71 Assembler   **** SYMBOL TABLE *****
+ 
+JMP15   Rel      180 #0070F -   595   597
+JMP16   Rel      184 #00735 -   610   613
+JMP2    Rel      120 #004B8 -   420   422
+JMP20   Rel       78 #0030E -   265   267
+JMP21   Rel       79 #0031E -   270   273
+JMP22   Rel       82 #0033D -   280   282
+JMP23   Rel       83 #00344 -   277   284
+JMP25   Rel       86 #0035E -   292   295
+JMP26   Rel       88 #00377 -   299   303
+JMP27   Rel       92 #0039C -   308   314
+JMP28   Rel       93 #003AA -   315   319
+JMP3    Rel      129 #00511 -   450   452
+JMP4    Rel      149 #005D4 -   510   512
+JMP5    Rel      131 #00521 -   455   457
+JMP51   Rel       35 #00160 -   116   119
+JMP52   Rel       37 #00174 -   120   123
+JMP53   Rel       62 #0026E -   203   205
+JMP54   Rel       75 #002F7 -   253   256
+LOOP    Rel       67 #002A6 -   226   235
+MAX     Rel      182 #00721 -    19   606
+MGOSUB  Abs    11033 #1AF01 -    53   524   538   550   582
+NDF     Rel       85 #00359 -   293   492
+NEWK    Rel      152 #005F3 -    21   523
+NEWK1   Rel      158 #0062F -   535   540
+NEWKd   Rel       46 #001D5 -   161   521
+NEWKp   Rel       44 #001C0 -   155   522
+NFD     Rel       77 #0030B -   219   266
+NOEX    Rel      193 #0078D -   407   421   500   511   644
+NOPURG  Rel      161 #0064B -   537   543
+NTOKEN  Abs     1874 #0493B -    56   128
+NXTSTM  Abs     3540 #08A48 -    58   659
+OBCOLL  Abs      517 #01435 -    69   169   175   523   577   658
+OFR     Rel      145 #005B2 -   484   486   500
+OUT     Rel      135 #00547 -    23   471
+OUTEL1  Abs     2124 #05300 -    73   162
+OUTRH   Rel       99 #003E6 -   343   409   498
+OUTd    Rel       44 #001B9 -   149   469
+OUTp    Rel       31 #0013E -   110   470
+PARERR  Abs     1204 #02F08 -    52   142
+POLANF  Rel       27 #0010E -    91    93
+POLEND  Rel       31 #0013C -    92    99   104
+POLHND  Rel       26 #00106 -    11    90
+POP1R   Abs     5964 #0E8FD -    78   527
+PRGERR  Rel      192 #00784 -   541   585   635
+PRGFMF  Abs     4128 #0A146 -    71   539   583
+PURK    Rel      174 #006D0 -    25   577
+PURKd   Rel       47 #001DC -   162   575
+PURKp   Rel       45 #001C7 -   156   576
+PUT     Rel      127 #004FD -    27   446
+PUTF    Rel       97 #003D0 -   327   330   333
+PUTd    Rel       44 #001B9 -   147   444
+PUTp    Rel       31 #0013E -   109   445
+PVAR    Rel       37 #0017B -   111   113   126
+RESPTR  Abs     1265 #03172 -    70   123   157
+RETURN  Rel      185 #00741 -   601   612   618
+RJUST   Abs     7651 #12AE2 -    66   273   477
+TxEn01  Rel       17 #000AA -    13    32
+TxEn02  Rel       18 #000B5 -    15    34
+TxEn03  Rel       19 #000BE -    17    36
+TxEn04  Rel       19 #000C7 -    19    38
+
+Page 0016         
+HP-71 Assembler   **** SYMBOL TABLE *****
+ 
+TxEn05  Rel       21 #000D2 -    21    40
+TxEn06  Rel       22 #000DD -    23    42
+TxEn07  Rel       23 #000E6 -    25    44
+TxEn08  Rel       24 #000F1 -    27    46
+TxEn09  Rel       25 #000FA -    29    48
+TxTbSt  Rel       17 #000AA -     9    13    15    17    19    21    23    25
+                             -    27    29    32
+UPD     Rel      147 #005C0 -    29   506
+UPDANN  Abs     7921 #13571 -    63   196   653
+UPDd    Rel       44 #001B9 -   150   504
+UPDp    Rel       31 #0013E -   111   505
+VARP    Abs     1358 #0350E -    55   115   126
+VER$en  Rel       31 #00138 -    96   103
+VER$st  Rel       29 #00128 -    96   102   103
+VHa     Abs    19469 #2F88B -    86   183   329   346
+VNRa    Abs    19468 #2F881 -    84   171   177   215   473   493
+VRa     Abs    19469 #2F886 -    85   180   326   343
+bserr   Rel      192 #00786 -   396   465   517   637
+ 
+ 
+ 
+ 
+ 
+ 
+ Source : memt.asm
+ 
+ Object : memt.lex
+ 
+Listing : memt.lst
+ 
+   Date : 00:00:00 on 01/01/2000
+ 
+ Errors : 000

@@ -1,0 +1,24 @@
+
+ASM71 
+ 
+
+
+ Source : bsp.asm
+ Object : bsp.lex
+Listing : bsp.lst
+
+Source Lines :     55           Errors :     0
+Comparing lst file
+Comparing lex file
+
+ASM71 
+ 
+
+
+ Source : memt.asm
+ Object : memt.lex
+Listing : memt.lst
+
+Source Lines :    660           Errors :     0
+Comparing lst file
+Comparing lex file

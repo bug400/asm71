@@ -5,6 +5,7 @@ project(asm71)
 cmake_minimum_required (VERSION 2.8.4)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 enable_language(Pascal)
+enable_testing()
 #
 # set build type = Release
 #
@@ -61,3 +62,14 @@ endif(UNIX)
 if(UNIX)
 install(FILES examples/bsp.asm DESTINATION ${DATAPATH})
 endif(UNIX)
+
+# tests
+#
+if(WIN32)
+    SET(TESTDRIVER "runtest.cmd")
+endif(WIN32)
+if (UNIX)
+    SET(TESTDRIVER "runtest.sh")
+endif(UNIX)
+add_test(NAME basic WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test COMMAND  "${CMAKE_SOURCE_DIR}/test/${TESTDRIVER}" "basic" "${CMAKE_CURRENT_BINARY_DIR}")
+

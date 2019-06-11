@@ -1,0 +1,136 @@
+
+ASM71 
+ 
+ 
+0001 00000                  LEX    'TEST'  assemble LEX-file 'TEST'
+0001 00000 45543545    NIBASC 'TEST    '    Filename (LIF Directory Entry)
+     00008 02020202
+0001 00010 0202        NIBASC '  '
+0001 00014 2E80        NIBHEX 2E80          File Type is Lex
+0001 00018 00000000    NIBHEX 00000000      ignore File Start Record
+0001 00020 0000        NIBHEX 0000          File length (records)
+0001 00024 00          CON(2) 00
+0001 00026 10          CON(2) 01
+0001 00028 00          CON(2) #00           Date of creation
+0001 0002A 10          CON(2) #01
+0001 0002C 10          CON(2) #01
+0001 0002E 00          CON(2) #00           Time of creation
+0001 00030 00          CON(2) #00
+0001 00032 00          CON(2) #00
+0001 00034 0810        NIBHEX 0810          Volume Flag/Number
+0001 00038 38000       CON(5) (FiLeNd)-(64) File length (nibbles)
+0001 0003D 000         NIBHEX 000           End of Directory Entry
+0002 00040           *
+0003 00040           *
+0004 00040           *      Name:  PROMPT$
+0005 00040           *
+0006 00040           *      Purpose:
+0007 00040           *      This Function puts the CPU into a low power consumption
+0008 00040           *      state. The machine wakes up if a key is pressed and returns
+0009 00040           *      the keycode (see KEY$ function).
+0010 00040           *      Note: the < > cursor keys may be used to scroll a displayed
+0011 00040           *      string while the machine is inactive.
+0012 00040           *
+0013 00040           *
+0014 00040           *      Name:  REV$
+0015 00040           *
+0016 00040           *      Purpose:
+0017 00040           *      Reverses a string
+0018 00040           *
+0019 00040           *
+0020 00040           *
+0021 00040                  ID     #5C     ID of LEX File
+0021 00040 C5          CON(2) #5C
+0021 00042 10          CON(2) 0001
+0021 00044 20          CON(2) 0002
+0021 00046 00000       CON(5) 0
+0021 0004B F           NIBHEX F
+0021 0004C 0200        REL(4) 1+TxTbSt
+0022 00050                  MSG    0       No message table
+0022 00050 0000        CON(4) 0
+0023 00054                  POLL   0       No poll handler
+0023 00054 00000       CON(5) 0
+0024 00059           *
+0025 00059                  ENTRY  PROMPT  First keyword is coded at the label PROMPT
+0025 00059             ***MAIN TABLE***
+0025 00059 000         CON(3) (TxEn01)-(TxTbSt)
+0025 0005C 03000       REL(5) PROMPT
+0026 00061                  CHAR   #F      First keyword is a BASIC Function
+0026 00061 F           CON(1) #F
+0027 00062                  ENTRY  REV     Second keyword is coded at the label REV
+0027 00062 110         CON(3) (TxEn02)-(TxTbSt)
+0027 00065 05000       REL(5) REV
+0028 0006A                  CHAR   #F      Second keyword is a BASIC Function
+0028 0006A F           CON(1) #F
+
+Page 0002         
+HP-71 Assembler   
+ 
+0029 0006B           *
+0030 0006B                  KEY    'PROMPT$' First keyword is called 'PROMPT$'
+0030 0006B             ***TEXT TABLE***
+0030 0006B           TxTbSt
+0030 0006B           TxEn01
+0030 0006B D           CON(1) 13
+0030 0006C 0525F4D4    NIBASC 'PROMPT$'
+     00074 054542  
+0031 0007A                  TOKEN  1         First keyword has token 1
+0031 0007A 10          CON(2) 1
+0032 0007C                  KEY    'REV$'    Second keyword is called 'REV$'
+0032 0007C           TxEn02
+0032 0007C 7           CON(1) 07
+0032 0007D 25546542    NIBASC 'REV$'
+0033 00085                  TOKEN  2         Second keyword has token 2
+0033 00085 20          CON(2) 2
+0034 00087                  ENDTXT
+0034 00087 1FF         NIBHEX 1FF
+0035 0008A           *
+0036 0008A           *      PROMPT$ BASIC function execute
+0037 0008A           *
+0038 0008A 00               NIBHEX 00
+0039 0008C 136       PROMPT CD0EX
+0040 0008F 109              R1=C           save PC
+0041 00092 137              CD1EX
+0042 00095 10A              R2=C           save SP
+0043 00098 8FE2120          GOSBVL =SCRLLR halt and process scrolling
+0044 0009F 119              C=R1
+0045 000A2 136              CD0EX          restore PC
+0046 000A5 11A              C=R2
+0047 000A8 137              CD1EX          restore SP
+0048 000AB 8D8ACA1          GOVLNG =KEY$   return keycode
+0049 000B2           *
+0050 000B2           *      REV$ BASIC function execute
+0051 000B2           *
+0052 000B2 411              NIBHEX 411
+0053 000B5 8FE83B1   REV    GOSBVL =REV$   reverse string on stack
+0054 000BC 8DC32F0          GOVLNG =EXPR   return string
+0055 000C3                  END
+
+Page 0003         
+HP-71 Assembler   **** SYMBOL TABLE *****
+ 
+EXPR    Ext     6201 #0F23C -    54
+FiLeNd  Rel       19 #000C3 -     1
+KEY$    Ext    10973 #1ACA8 -    48
+PROMPT  Rel       14 #0008C -    25    39
+REV     Rel       18 #000B5 -    27    53
+REV$    Ext    11150 #1B38E -    53
+SCRLLR  Ext      849 #0212E -    43
+TxEn01  Rel       10 #0006B -    25    30
+TxEn02  Rel       12 #0007C -    27    32
+TxTbSt  Rel       10 #0006B -    21    25    27    30
+ 
+ 
+ 
+ 
+ 
+ 
+ Source : bsp.asm
+ 
+ Object : bsp.lex
+ 
+Listing : bsp.lst
+ 
+   Date : 00:00:00 on 01/01/2000
+ 
+ Errors : 000

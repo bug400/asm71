@@ -33,6 +33,7 @@ Date        Issue
 04.05.2015  HP-71 and HP-IL entry points of the areuh
             assembler implemented.
 27.04.2019  Fixed compile issues on Windows 64bit
+09.05.2019  Regression test mode implemented
 }
 
 uses sysutils;
@@ -42,14 +43,21 @@ const  NULENT = 8; (* Null entry in opcode table *)
        VERSION = 'Vers 2.04'; (* assembler version *)
 {$ifdef Win32}
        SYS = '(Windows 32bit)';
+       {$define SYS_DEFINED}
 {$endif}
 {$ifdef Win64}
        SYS = '(Windows 64bit)';
+       {$define SYS_DEFINED}
 {$endif}
 {$ifdef Unix}
        SYS = '(Unix)';
+       {$define SYS_DEFINED}
 {$endif}
-       VERS_DATE= 'April 2019  ';
+{$ifndef SYS_DEFINED}
+       SYS = '      ';
+{$endif}
+
+       VERS_DATE= 'June 2019   ';
        COPYRIGHT= '(C) Copyright J. Siebold 1985-2019';
        MAXNUM  = 1048575;
 
@@ -3232,6 +3240,7 @@ var    ROOT            : ref;
        LC       : LongInt;
        FILESIZE : LongInt;
        REF_OPT  : integer;
+       TESTMODE : boolean;
        FILETYPE : filtyp;
        KNOWN    : syttyp;
        DECHEX   : array[0..15] of char;
@@ -3740,8 +3749,14 @@ begin
 end;
 
 begin
-   TIMEVAR:= GET_TIME;
-   DATEVAR:= GET_DATE;
+   if(TESTMODE) then
+   begin
+      TIMEVAR:='00:00:00';
+      DATEVAR:='01/01/2000';
+   end else begin
+      TIMEVAR:= GET_TIME;
+      DATEVAR:= GET_DATE;
+   end;
 end;
 (* ASM71SYT.INC*)
 
@@ -5267,9 +5282,15 @@ procedure LISTHEADER;
 begin
    if not NOLIST then begin
       OUTLINE(#12);
-      OUTLINE('ASM71 '+SYS+' '+VERSION+'         '+VERS_DATE+'        '+DATEVAR+
+      if(TESTMODE) then
+      begin
+         OUTLINE('ASM71 ');
+         OUTLINE(' ')
+      end else begin
+         OUTLINE('ASM71 '+SYS+' '+VERSION+'         '+VERS_DATE+'        '+DATEVAR+
           '    '+TIMEVAR);
-      OUTLINE(COPYRIGHT);
+         OUTLINE(COPYRIGHT);
+      end;
       OUTLINE(' ');
    end;
 end;
@@ -5302,6 +5323,7 @@ end;
 procedure VAR_INIT;
 
 begin
+   TESTMODE:=GetEnvironmentVariable('ASM71REGRESSIONTEST')<>'';
    ERRORCOUNT:=0;
    TOLIST:= false;
    TOKEXIST:= false;
@@ -5336,9 +5358,15 @@ procedure HEADER;
 
 begin
    writeln;
-   writeln('ASM71 '+SYS+' '+VERSION+'         '+VERS_DATE+'        '+DATEVAR+
+   if(TESTMODE) then
+   begin
+      writeln('ASM71 ');
+      writeln(' ');
+   end else begin
+      writeln('ASM71 '+SYS+' '+VERSION+'         '+VERS_DATE+'        '+DATEVAR+
           '    '+TIMEVAR);
-   writeln(COPYRIGHT);
+      writeln(COPYRIGHT);
+   end;
 end;
 
 procedure INIT;

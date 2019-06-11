@@ -14,6 +14,7 @@ mkdir ../cmake-tmp
 pushd ../cmake-tmp > /dev/null
 cmake .. 
 make DESTDIR=../macos/asm71.dst install
+make test
 make clean
 popd > /dev/null
 rm -rf asm71.resources
