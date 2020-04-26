@@ -13,7 +13,7 @@ Index
 Description
 -----------
 
-ASM71 is a cross assembler for the HP-71B which is almost completely compatible 
+ASM71 is a cross assembler for the HP-71B which is completely compatible 
 with the assembler of the HP-71B Forth/Assembler ROM. The assembler creates LIF 
 compatible LEX- or BIN- files which can be transferred to the HP-71B.
 

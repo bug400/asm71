@@ -813,152 +813,152 @@ HP-71 Assembler
 Page 0014         
 HP-71 Assembler   **** SYMBOL TABLE *****
  
-A-MULT  Abs    11143 #1B349 -    64   389   546
-ADDRSS  Abs     6275 #0F527 -    68   244
-ADR     Rel      110 #0044C -   385   487
-ANZ     Rel      178 #006FD -    13   591
-BSERR   Abs     3778 #0939A -    61   637
-CRETF+  Abs     3398 #084C4 -    80   551
-CRTERR  Rel      192 #00784 -   553   636
-D1MSTK  Abs    10375 #1954E -    77   526
-DCHXW   Abs     6063 #0ECDC -    60   275   479
-DEL     Rel      118 #004A4 -    15   416
-DELd    Rel       44 #001B9 -   148   414
-DELp    Rel       33 #0014C -   115   415
-DROPDC  Abs     2161 #05470 -    57   150
-DUP     Rel      193 #0078D -   451   646
-END1    Rel       42 #001A7 -   132   137
-ENDADR  Rel      109 #00443 -   379   423   457
-ENDF    Rel       70 #002C2 -   227   237
-EOLCK   Abs     1087 #02A7E -    54   119   156
-ERR1    Rel       42 #001A9 -   112   114   118   122   139
-ERR2    Rel      113 #0046D -   396   403   417
-ERR3    Rel      150 #005E5 -   507   517
-ERR4    Rel      133 #00539 -   447   465   472
-EXIT    Rel      196 #007AF -   410   440   463   499   514   571   586   657
-EXPEX-  Abs     6181 #0F178 -    76   525
-EXPR    Abs     6201 #0F23C -    79   623
-FDF     Rel       84 #00350 -   290   354
-FFD     Rel       76 #002F9 -   260   336
-FILEF   Abs     4088 #09FB0 -    65   202   629
-FIND    Rel       64 #00280 -   215   404   418   448   508
-FINDF   Rel      188 #0075B -   535   578   593   608   625
-FIXDC   Abs     2165 #05493 -    74   161
-FIXP    Abs     1086 #02A6E -    75   155
-FLGREG  Abs    19428 #2F6E9 -    62   191   648
-FLOAT   Abs    11139 #1B322 -    67   306
-FLTDH   Abs    11113 #1B223 -    72   528
-FNDERR  Rel      192 #00784 -   581   596   634
-FOUND   Rel       71 #002C6 -   232   239
-FULCHK  Rel      105 #0041E -   362   453
-FULL    Rel      193 #0078D -   456   645
-FiLeNd  Rel      198 #007BD -     1
-GET     Rel      114 #0047B -    17   402
-GETADR  Rel       71 #002CE -   178   181   185   244
-GETF    Rel      102 #00403 -   344   347   350
-GETd    Rel       44 #001B9 -   146   400
-GETp    Rel       31 #0013E -   108   401
-HDFLT   Abs    11138 #1B31B -    81   618
-HEXDEC  Abs     6059 #0ECAF -    59
-HXDCW   Abs     6059 #0ECB4 -    82   305
-ILLPAR  Rel       41 #0019F -   127   135
-ILLVAR  Rel       75 #002EF -   245   254
-INCNP   Rel      108 #00439 -   369   372
-INIT    Rel       50 #001F9 -   174   402   446   471   506
-INIT1   Rel       55 #00227 -   172   184
-INITD   Rel       48 #001E3 -   168   416
-INRH    Rel       94 #003B3 -   326   462   513
-INVARG  Rel      150 #005DF -   516   529   533
-JMP1    Rel      116 #0048F -   406   408
-JMP12   Rel      166 #0067D -   552   554
-JMP13   Rel      176 #006E4 -   580   582
-JMP14   Rel      178 #006F7 -   584   586
+A-MULT   Abs    111433 #1B349 -    64   389   546
+ADDRSS   Abs     62759 #0F527 -    68   244
+ADR      Rel      1100 #0044C -   385   487
+ANZ      Rel      1789 #006FD -    13   591
+BSERR    Abs     37786 #0939A -    61   637
+CRETF+   Abs     33988 #084C4 -    80   551
+CRTERR   Rel      1924 #00784 -   553   636
+D1MSTK   Abs    103758 #1954E -    77   526
+DCHXW    Abs     60636 #0ECDC -    60   275   479
+DEL      Rel      1188 #004A4 -    15   416
+DELd     Rel       441 #001B9 -   148   414
+DELp     Rel       332 #0014C -   115   415
+DROPDC   Abs     21616 #05470 -    57   150
+DUP      Rel      1933 #0078D -   451   646
+END1     Rel       423 #001A7 -   132   137
+ENDADR   Rel      1091 #00443 -   379   423   457
+ENDF     Rel       706 #002C2 -   227   237
+EOLCK    Abs     10878 #02A7E -    54   119   156
+ERR1     Rel       425 #001A9 -   112   114   118   122   139
+ERR2     Rel      1133 #0046D -   396   403   417
+ERR3     Rel      1509 #005E5 -   507   517
+ERR4     Rel      1337 #00539 -   447   465   472
+EXIT     Rel      1967 #007AF -   410   440   463   499   514   571   586   657
+EXPEX-   Abs     61816 #0F178 -    76   525
+EXPR     Abs     62012 #0F23C -    79   623
+FDF      Rel       848 #00350 -   290   354
+FFD      Rel       761 #002F9 -   260   336
+FILEF    Abs     40880 #09FB0 -    65   202   629
+FIND     Rel       640 #00280 -   215   404   418   448   508
+FINDF    Rel      1883 #0075B -   535   578   593   608   625
+FIXDC    Abs     21651 #05493 -    74   161
+FIXP     Abs     10862 #02A6E -    75   155
+FLGREG   Abs    194281 #2F6E9 -    62   191   648
+FLOAT    Abs    111394 #1B322 -    67   306
+FLTDH    Abs    111139 #1B223 -    72   528
+FNDERR   Rel      1924 #00784 -   581   596   634
+FOUND    Rel       710 #002C6 -   232   239
+FULCHK   Rel      1054 #0041E -   362   453
+FULL     Rel      1933 #0078D -   456   645
+FiLeNd   Rel      1981 #007BD -     1
+GET      Rel      1147 #0047B -    17   402
+GETADR   Rel       718 #002CE -   178   181   185   244
+GETF     Rel      1027 #00403 -   344   347   350
+GETd     Rel       441 #001B9 -   146   400
+GETp     Rel       318 #0013E -   108   401
+HDFLT    Abs    111387 #1B31B -    81   618
+HEXDEC   Abs     60591 #0ECAF -    59
+HXDCW    Abs     60596 #0ECB4 -    82   305
+ILLPAR   Rel       415 #0019F -   127   135
+ILLVAR   Rel       751 #002EF -   245   254
+INCNP    Rel      1081 #00439 -   369   372
+INIT     Rel       505 #001F9 -   174   402   446   471   506
+INIT1    Rel       551 #00227 -   172   184
+INITD    Rel       483 #001E3 -   168   416
+INRH     Rel       947 #003B3 -   326   462   513
+INVARG   Rel      1503 #005DF -   516   529   533
+JMP1     Rel      1167 #0048F -   406   408
+JMP12    Rel      1661 #0067D -   552   554
+JMP13    Rel      1764 #006E4 -   580   582
+JMP14    Rel      1783 #006F7 -   584   586
 
 Page 0015         
 HP-71 Assembler   **** SYMBOL TABLE *****
  
-JMP15   Rel      180 #0070F -   595   597
-JMP16   Rel      184 #00735 -   610   613
-JMP2    Rel      120 #004B8 -   420   422
-JMP20   Rel       78 #0030E -   265   267
-JMP21   Rel       79 #0031E -   270   273
-JMP22   Rel       82 #0033D -   280   282
-JMP23   Rel       83 #00344 -   277   284
-JMP25   Rel       86 #0035E -   292   295
-JMP26   Rel       88 #00377 -   299   303
-JMP27   Rel       92 #0039C -   308   314
-JMP28   Rel       93 #003AA -   315   319
-JMP3    Rel      129 #00511 -   450   452
-JMP4    Rel      149 #005D4 -   510   512
-JMP5    Rel      131 #00521 -   455   457
-JMP51   Rel       35 #00160 -   116   119
-JMP52   Rel       37 #00174 -   120   123
-JMP53   Rel       62 #0026E -   203   205
-JMP54   Rel       75 #002F7 -   253   256
-LOOP    Rel       67 #002A6 -   226   235
-MAX     Rel      182 #00721 -    19   606
-MGOSUB  Abs    11033 #1AF01 -    53   524   538   550   582
-NDF     Rel       85 #00359 -   293   492
-NEWK    Rel      152 #005F3 -    21   523
-NEWK1   Rel      158 #0062F -   535   540
-NEWKd   Rel       46 #001D5 -   161   521
-NEWKp   Rel       44 #001C0 -   155   522
-NFD     Rel       77 #0030B -   219   266
-NOEX    Rel      193 #0078D -   407   421   500   511   644
-NOPURG  Rel      161 #0064B -   537   543
-NTOKEN  Abs     1874 #0493B -    56   128
-NXTSTM  Abs     3540 #08A48 -    58   659
-OBCOLL  Abs      517 #01435 -    69   169   175   523   577   658
-OFR     Rel      145 #005B2 -   484   486   500
-OUT     Rel      135 #00547 -    23   471
-OUTEL1  Abs     2124 #05300 -    73   162
-OUTRH   Rel       99 #003E6 -   343   409   498
-OUTd    Rel       44 #001B9 -   149   469
-OUTp    Rel       31 #0013E -   110   470
-PARERR  Abs     1204 #02F08 -    52   142
-POLANF  Rel       27 #0010E -    91    93
-POLEND  Rel       31 #0013C -    92    99   104
-POLHND  Rel       26 #00106 -    11    90
-POP1R   Abs     5964 #0E8FD -    78   527
-PRGERR  Rel      192 #00784 -   541   585   635
-PRGFMF  Abs     4128 #0A146 -    71   539   583
-PURK    Rel      174 #006D0 -    25   577
-PURKd   Rel       47 #001DC -   162   575
-PURKp   Rel       45 #001C7 -   156   576
-PUT     Rel      127 #004FD -    27   446
-PUTF    Rel       97 #003D0 -   327   330   333
-PUTd    Rel       44 #001B9 -   147   444
-PUTp    Rel       31 #0013E -   109   445
-PVAR    Rel       37 #0017B -   111   113   126
-RESPTR  Abs     1265 #03172 -    70   123   157
-RETURN  Rel      185 #00741 -   601   612   618
-RJUST   Abs     7651 #12AE2 -    66   273   477
-TxEn01  Rel       17 #000AA -    13    32
-TxEn02  Rel       18 #000B5 -    15    34
-TxEn03  Rel       19 #000BE -    17    36
-TxEn04  Rel       19 #000C7 -    19    38
+JMP15    Rel      1807 #0070F -   595   597
+JMP16    Rel      1845 #00735 -   610   613
+JMP2     Rel      1208 #004B8 -   420   422
+JMP20    Rel       782 #0030E -   265   267
+JMP21    Rel       798 #0031E -   270   273
+JMP22    Rel       829 #0033D -   280   282
+JMP23    Rel       836 #00344 -   277   284
+JMP25    Rel       862 #0035E -   292   295
+JMP26    Rel       887 #00377 -   299   303
+JMP27    Rel       924 #0039C -   308   314
+JMP28    Rel       938 #003AA -   315   319
+JMP3     Rel      1297 #00511 -   450   452
+JMP4     Rel      1492 #005D4 -   510   512
+JMP5     Rel      1313 #00521 -   455   457
+JMP51    Rel       352 #00160 -   116   119
+JMP52    Rel       372 #00174 -   120   123
+JMP53    Rel       622 #0026E -   203   205
+JMP54    Rel       759 #002F7 -   253   256
+LOOP     Rel       678 #002A6 -   226   235
+MAX      Rel      1825 #00721 -    19   606
+MGOSUB   Abs    110337 #1AF01 -    53   524   538   550   582
+NDF      Rel       857 #00359 -   293   492
+NEWK     Rel      1523 #005F3 -    21   523
+NEWK1    Rel      1583 #0062F -   535   540
+NEWKd    Rel       469 #001D5 -   161   521
+NEWKp    Rel       448 #001C0 -   155   522
+NFD      Rel       779 #0030B -   219   266
+NOEX     Rel      1933 #0078D -   407   421   500   511   644
+NOPURG   Rel      1611 #0064B -   537   543
+NTOKEN   Abs     18747 #0493B -    56   128
+NXTSTM   Abs     35400 #08A48 -    58   659
+OBCOLL   Abs      5173 #01435 -    69   169   175   523   577   658
+OFR      Rel      1458 #005B2 -   484   486   500
+OUT      Rel      1351 #00547 -    23   471
+OUTEL1   Abs     21248 #05300 -    73   162
+OUTRH    Rel       998 #003E6 -   343   409   498
+OUTd     Rel       441 #001B9 -   149   469
+OUTp     Rel       318 #0013E -   110   470
+PARERR   Abs     12040 #02F08 -    52   142
+POLANF   Rel       270 #0010E -    91    93
+POLEND   Rel       316 #0013C -    92    99   104
+POLHND   Rel       262 #00106 -    11    90
+POP1R    Abs     59645 #0E8FD -    78   527
+PRGERR   Rel      1924 #00784 -   541   585   635
+PRGFMF   Abs     41286 #0A146 -    71   539   583
+PURK     Rel      1744 #006D0 -    25   577
+PURKd    Rel       476 #001DC -   162   575
+PURKp    Rel       455 #001C7 -   156   576
+PUT      Rel      1277 #004FD -    27   446
+PUTF     Rel       976 #003D0 -   327   330   333
+PUTd     Rel       441 #001B9 -   147   444
+PUTp     Rel       318 #0013E -   109   445
+PVAR     Rel       379 #0017B -   111   113   126
+RESPTR   Abs     12658 #03172 -    70   123   157
+RETURN   Rel      1857 #00741 -   601   612   618
+RJUST    Abs     76514 #12AE2 -    66   273   477
+TxEn01   Rel       170 #000AA -    13    32
+TxEn02   Rel       181 #000B5 -    15    34
+TxEn03   Rel       190 #000BE -    17    36
+TxEn04   Rel       199 #000C7 -    19    38
 
 Page 0016         
 HP-71 Assembler   **** SYMBOL TABLE *****
  
-TxEn05  Rel       21 #000D2 -    21    40
-TxEn06  Rel       22 #000DD -    23    42
-TxEn07  Rel       23 #000E6 -    25    44
-TxEn08  Rel       24 #000F1 -    27    46
-TxEn09  Rel       25 #000FA -    29    48
-TxTbSt  Rel       17 #000AA -     9    13    15    17    19    21    23    25
-                             -    27    29    32
-UPD     Rel      147 #005C0 -    29   506
-UPDANN  Abs     7921 #13571 -    63   196   653
-UPDd    Rel       44 #001B9 -   150   504
-UPDp    Rel       31 #0013E -   111   505
-VARP    Abs     1358 #0350E -    55   115   126
-VER$en  Rel       31 #00138 -    96   103
-VER$st  Rel       29 #00128 -    96   102   103
-VHa     Abs    19469 #2F88B -    86   183   329   346
-VNRa    Abs    19468 #2F881 -    84   171   177   215   473   493
-VRa     Abs    19469 #2F886 -    85   180   326   343
-bserr   Rel      192 #00786 -   396   465   517   637
+TxEn05   Rel       210 #000D2 -    21    40
+TxEn06   Rel       221 #000DD -    23    42
+TxEn07   Rel       230 #000E6 -    25    44
+TxEn08   Rel       241 #000F1 -    27    46
+TxEn09   Rel       250 #000FA -    29    48
+TxTbSt   Rel       170 #000AA -     9    13    15    17    19    21    23    25
+                              -    27    29    32
+UPD      Rel      1472 #005C0 -    29   506
+UPDANN   Abs     79217 #13571 -    63   196   653
+UPDd     Rel       441 #001B9 -   150   504
+UPDp     Rel       318 #0013E -   111   505
+VARP     Abs     13582 #0350E -    55   115   126
+VER$en   Rel       312 #00138 -    96   103
+VER$st   Rel       296 #00128 -    96   102   103
+VHa      Abs    194699 #2F88B -    86   183   329   346
+VNRa     Abs    194689 #2F881 -    84   171   177   215   473   493
+VRa      Abs    194694 #2F886 -    85   180   326   343
+bserr    Rel      1926 #00786 -   396   465   517   637
  
  
  

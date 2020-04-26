@@ -109,16 +109,16 @@ HP-71 Assembler
 Page 0003         
 HP-71 Assembler   **** SYMBOL TABLE *****
  
-EXPR    Ext     6201 #0F23C -    54
-FiLeNd  Rel       19 #000C3 -     1
-KEY$    Ext    10973 #1ACA8 -    48
-PROMPT  Rel       14 #0008C -    25    39
-REV     Rel       18 #000B5 -    27    53
-REV$    Ext    11150 #1B38E -    53
-SCRLLR  Ext      849 #0212E -    43
-TxEn01  Rel       10 #0006B -    25    30
-TxEn02  Rel       12 #0007C -    27    32
-TxTbSt  Rel       10 #0006B -    21    25    27    30
+=EXPR    Ext     62012 #0F23C -    54
+=KEY$    Ext    109736 #1ACA8 -    48
+=REV$    Ext    111502 #1B38E -    53
+=SCRLLR  Ext      8494 #0212E -    43
+FiLeNd   Rel       195 #000C3 -     1
+PROMPT   Rel       140 #0008C -    25    39
+REV      Rel       181 #000B5 -    27    53
+TxEn01   Rel       107 #0006B -    25    30
+TxEn02   Rel       124 #0007C -    27    32
+TxTbSt   Rel       107 #0006B -    21    25    27    30
  
  
  

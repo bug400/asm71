@@ -8,9 +8,7 @@
 <H3>A Cross Assembler for the HP-71B </H3>
 <HR SIZE="3">
 <H3>Introduction</H3>
-<p>ASM71 is a cross assembler for the HP-71B which is almost completely compatible to the
-assembler of the HP-71B Forth/Assembler ROM. The assembler creates LIF compatible LEX- or BIN- files
-which can be transferred to the HP-71B.
+<p>ASM71 is a cross assembler for the HP-71B which is completely compatible to the assembler of the HP-71B Forth/Assembler ROM. The assembler creates LIF compatible LEX- or BIN- files which can be transferred to the HP-71B.
 </p>
 
 <H3>Requirements</H3>
@@ -61,7 +59,10 @@ Identifier  Value     Description
 R           0         no symbol table
             1         symbol table (default)     
             2         symbol table with cross reference listing  
-L           8-32767   number of lines per page (default: 63)                           
+L           8-32767   number of lines per page (default: 63) 
+S           0         Labels which exceed 7 characters are truncated
+            1         Labels which exceed 7 characters throw an error
+
 </PRE>
 </p>
 <P>
@@ -96,13 +97,11 @@ The assembler source file must have the following form:
 ...  
 <i>END</i>
 </PRE>
-The output pseudo-op must be either <i>LEX</i> or <i>BIN</i> to determine whether the output
-will be a LEX- or a BIN-file. The pseudo-op <i>END</i> indicates the end of the source code.
+The output pseudo-op must be either <i>LEX</i> or <i>BIN</i> to determine whether the output will be a LEX- or a BIN-file. The pseudo-op <i>END</i> indicates the end of the source code.
 </P>
 
 <P>
-The code portion of the source file consists of any number of text lines, each containing
-one ore more of the following items: label, menmonic, modifier, pseudo-op, expression, comment.
+The code portion of the source file consists of any number of text lines, each containing one ore more of the following items: label, menmonic, modifier, pseudo-op, expression, comment.
 </P>
 
 <H4>Line format</H4>
@@ -125,20 +124,16 @@ The maximum length for labels and modifiers is 6 characters, the maximum length 
 
 <H4>Comments</H4>
 <P>
-Text that follows a complete instruction - a mnemonic and any required modifiers - is a comment. If 
-the first non blank character in column 1 or 2 is a star then the entire line is a comment.
+Text that follows a complete instruction - a mnemonic and any required modifiers - is a comment. If the first non blank character in column 1 or 2 is a star then the entire line is a comment.
 </p>
 
 <H4>Labels</H4>
 <P>
-Labels can contain up to six characters. All alphanumeric characters are allowed except commas,
-spaces and right parentheses. The first character cannot be a sharp (#), single quote('),
-minus sign (-), left parenthesis, star (*) or the digits 0 through 9. The labels are case
-sensitive! The restricted label 'FiLeNd' is reserved and must not be used in the source code.
-The assembler has an internal table of the names and addresses of the 
-<i>Supported Entry Points (HP-71B and HP-IL-Module)</i> and the <i>Fixed RAM-Locations</i>. These external symbols can be used in modifiers only
-by applying a leading equal sign (=). It is not allowed to use labels with leading equal signs
-in the label field.
+Labels can contain up to seven characters. All alphanumeric characters are allowed except commas, spaces and right parentheses. The first character cannot be a sharp (#), single quote('), minus sign (-), left parenthesis, star (*) or the digits 0 through 9. The labels are case sensitive! The restricted label 'FiLeNd' is reserved and must not be used in the source code.
+</p>
+If a label exceeds seven characters the remaining characters are ignored. If the strict mode is enabled (see above) labels which exceed seven characters throw an error.
+<p>
+The assembler has an internal table of the names and addresses of the <i>Supported Entry Points (HP-71B and HP-IL-Module)</i> and the <i>Fixed RAM-Locations</i>. These external symbols can be used in modifiers only by applying a leading equal sign (=).
 </P>
 <P>
 Example:  
@@ -155,23 +150,18 @@ GOVLNG   =FNRTN1
 
 <H4>Expressions</H4>
 <P>
-Expressions can contain labels, the location counter value, constants and operators.
-Any expression in parentheses can be nested within a larger expression. The level of
-nesting is not limited.
+Expressions can contain labels, the location counter value, constants and operators.  Any expression in parentheses can be nested within a larger expression. The level of nesting is not limited.
 </P>
 
 
 <H5>Labels</H5>
 <P>
-Legal label names are described above. When the label is used within a larger expression, 
-parentheses are required: <i>(XY-001)</i> is a label, but <i>XY-001</i> is an expression.  
+Legal label names are described above. When the label is used within a larger expression, parentheses are required: <i>(XY-001)</i> is a label, but <i>XY-001</i> is an expression.  
 </P>
 
 <H5>Location Counter Value</H5>
 <P>
-A star (*) in an expression represents the value of the location counter at the beginning
-of the current instructions. The value of the location counter is 0 at the beginning of the
-assembly.
+A star (*) in an expression represents the value of the location counter at the beginning of the current instructions. The value of the location counter is 0 at the beginning of the assembly.
 </p>
 
 <H5>Constants</H5>
@@ -180,11 +170,9 @@ assembly.
 The numeric value of a constant can be expressed in decimal, hexadecimal or ASCII.:  
 <UL>
 <LI>Decimal constants can't exceed 1.048.575.<BR>Example:    12345 </LI> 
-<LI>Hexadecimal constants must start with a sharp (#) and can't exceed FFFFF. Hexadecimal constants
-are required with LCHEX and NIBHEX. Leading (#) is optional if hexadecimal constants are required.<BR>  
+<LI>Hexadecimal constants must start with a sharp (#) and can't exceed FFFFF. Hexadecimal constants are required with LCHEX and NIBHEX. Leading (#) is optional if hexadecimal constants are required.<BR>  
 Example:   #F4D2  </LI>
-<LI> ASCII constants must be enclosed within single quotes (') and can contain one or two characters.
-ASCII constants are required with LCASC or NIBASC. With LCASC or NIBASC the length of the ASCII constant
+<LI> ASCII constants must be enclosed within single quotes (') and can contain one or two characters.  ASCII constants are required with LCASC or NIBASC. With LCASC or NIBASC the length of the ASCII constant
 can exceed 2 characters. <BR> 
 Example:   'XY' 
 </LI>
@@ -216,7 +204,7 @@ There are seven operators listed below in the descending order of precedence:
 
 <H4>Assembler Mnemonics</H4>
 <P>
-The HP-71B Assembler Mnemonics are described in detail in the HP-71 Software IDS Band 1. Note that asm71 dos not support the following mnemonics:
+The HP-71B Assembler Mnemonics are described in detail in the HP-71 Software IDS Volume 1. Note that asm71 dos not support the following mnemonics:
 <PRE>
 D0=HEX hh  
 D0=HEX hhhh  
@@ -468,15 +456,12 @@ there are no subprograms, enter <i>CHAIN -1</i>.
 <H3>Differences between asm71 and the assembler of the HP71-Forth/Assembler Rom </H3>
 <UL>
 <li>asm71 does not support FORTH primitives</li>
-<li>The length of labels is limited to 6 characters. Extra characters raise a syntax error.</li>
+<li>The length of labels is limited to 7 characters. Extra characters raise a syntax error if the strict mode is enabled.</li>
 <li>The filename in the LEX- and BIN- pseudo ops must be a valid LIF filename</li>
-<li>Labels with a leading "=" cannot be used in label fields</li>
-<li>Global  labels of the <i>Supported Entry Points (HP-71B and HP-IL module)</i> and the <i>RAM-Locations</i> can be used in the 
-modifier filed with a leading "="</li>
+<li>Global  labels of the <i>Supported Entry Points (HP-71B and HP-IL module)</i> and the <i>RAM-Locations</i> can be used in the modifier filed with a leading "="</li>
 <li>The depth of expressions in the modifier field is not limited</li>
 <li>asm71 supports the generation of symbol cross reference listings</li>
-<li>The B=B+A and D1=AS opcode opcode errors of the HP-71B Forth/Assembler ROM have been fixed in asm71. The other known
-ROM errors do not apply to the asm71.</li>
+<li>The B=B+A and D1=AS opcode opcode errors of the HP-71B Forth/Assembler ROM have been fixed in asm71. The other known ROM errors do not apply to asm71.</li>
 </ul>
 
 <H3>Format of the object file </H3>
