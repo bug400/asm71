@@ -23,14 +23,14 @@ See the doc/asm71.html file for more information about features and usage.
 Compatibility
 -------------
 
-ASM71 was tested on LINUX, Windows 10 and macOS.
+ASM71 was tested on LINUX, Windows 10 and macOS (Intel).
 
 
 INSTALLATION
 ------------
 
 
-The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit), Windows (32 bit and 64bit) and macOS.
+The [release](https://github.com/bug400/asm71/releases) section provides precompiled binaries for LINUX (32 and 64bit), Windows (32 bit and 64bit) and macOS (Intel).
 
 See the [Installation Instructions](https://github.com/bug400/asm71/blob/master/INSTALL.md) how to install.
 
