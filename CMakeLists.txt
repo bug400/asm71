@@ -29,7 +29,18 @@ if(WIN32)
   endif()
 endif(WIN32)
 #
-# buld emu7470
+# macOS cross compiling Intel or M1
+#
+if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin")
+  if ($ENV{Platform} STREQUAL "aarch64")
+    set(CMAKE_Pascal_FLAGS "${CMAKE_Pascal_FLAGS} -Paarch64")
+  endif()
+  if ($ENV{Platform} STREQUAL "x86_64")
+    set(CMAKE_Pascal_FLAGS "${CMAKE_Pascal_FLAGS} -Px86_64")
+  endif()
+endif()
+#
+# buld asm71
 #
 add_executable( "asm71" "src/asm71.pas")
 #
@@ -72,4 +83,5 @@ if (UNIX)
     SET(TESTDRIVER "runtest.sh")
 endif(UNIX)
 add_test(NAME basic WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test COMMAND  "${CMAKE_SOURCE_DIR}/test/${TESTDRIVER}" "basic" "${CMAKE_CURRENT_BINARY_DIR}")
+#add_test(NAME jpcf05 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test COMMAND  "${CMAKE_SOURCE_DIR}/test/${TESTDRIVER}" "jpcf05" "${CMAKE_CURRENT_BINARY_DIR}")
 

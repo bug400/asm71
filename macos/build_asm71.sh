@@ -9,14 +9,46 @@ if [ -z "${version}" ] ; then
    exit 1
 fi
 rm -rf asm71.dst/*
+#
+# Intel build
+#
+export Platform=x86_64
 rm -rf ../cmake-tmp
 mkdir ../cmake-tmp
 pushd ../cmake-tmp > /dev/null
 cmake .. 
+make
+cp asm71 ../macos/asm71.intel
+popd > /dev/null
+#
+# Arm build
+#
+export Platform=aarch64
+rm -rf ../cmake-tmp
+mkdir ../cmake-tmp
+pushd ../cmake-tmp > /dev/null
+cmake .. 
+make
+cp asm71 ../macos/asm71.arm
 make DESTDIR=../macos/asm71.dst install
+popd > /dev/null
+#
+# create universal binary
+#
+lipo -create -output asm71 asm71.arm asm71.intel
+strip asm71
+cp asm71 asm71.dst/usr/local/bin
+#
+# test universal binary
+#
+pushd ../cmake-tmp > /dev/null
+cp ../macos/asm71 .
 make test
 make clean
 popd > /dev/null
+#
+# build package
+#
 rm -rf asm71.resources
 mkdir asm71.resources
 cp ../LICENSE asm71.resources
@@ -43,3 +75,4 @@ productbuild --distribution asm71.xml --package-path=build_products/ --resources
 rm build_products/asm71.pkg
 rm -rf asm71.dst/*
 rm -rf ../cmake-tmp
+rm -f asm71 asm71.intel asm71.arm

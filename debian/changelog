@@ -1,11 +1,11 @@
-asm71 (2.1.0-ubuntu1) xenial; urgency=medium
+asm71 (2.1.0) bullseye; urgency=medium
 
   * Labels starting with "=" now allowed in label field
   * Added the strict mode option
   * Labels longer than 7 characters are truncated and raise an error only if strict mode was enabled.
   * Fixed truncated decimal values in the symbol reference listing
 
- -- trusty <achim@trillian>  Fri, 10 Apr 2020 17:22:15 +0200
+ -- bullseye <bullseye@trillian>  Fri, 10 Apr 2020 17:22:15 +0200
 
 asm71 (2.0-4ubuntu1) bionic; urgency=medium
 
