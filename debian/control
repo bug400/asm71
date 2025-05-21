@@ -2,7 +2,7 @@ Source: asm71
 Section: misc
 Priority: optional
 Maintainer: Joachim Siebold <bug400@gmx.de>
-Build-Depends: binutils, fpc, debhelper, cmake , build-essential, cdbs
+Build-Depends: binutils, fpc, debhelper, cmake , build-essential
 Standards-Version: 0.9
 
 Package: asm71
