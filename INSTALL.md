@@ -22,16 +22,18 @@ the release comments, which Debian version is currently supported. To install th
 
 Windows:
 
-There are installer exe file to safely install ASM71. Download 
-the appropriate 32 or 64 bit version of the installer file and follow the
-instructions below.
+There is an MSI installer file to safely install ASM71 on Windows 10/11. There is no 32bit version any more. The installer only allows an installation for the current user and modifies the PATH environment variable. The package can be removed in the "Apps and Features" section in the Windows Settings. The changes to the PATH variable are then reset.
 
-* Uninstall any installed version of ASM71 before installing a new version.
-* A 32 bit version of ASM71 will not install on a 64 bit windows
-* You may choose a system-wide installation or an installation only for
-the current user. A system-wide installation requires administrator privileges.
-* You may choose to modify the PATH variable. This is not necessary if you call ASM71 from the "asm71 prompt" in the start menu.
-* It is recommended to uninstall ASM71 from the legacy "programs and features" control panel. Uninstalling from the "apps and features " control panel (Windows 10) requires to enter administrator credentials even for a local installation.
+Since there is no longer a Start Menu entry for ASM71, it is recommended that you create a link to the file
+
+
+     C:\Users\<your username>\AppData\Local\Programs\asm71\doc\readme.html
+
+on the desktop in order to access the documentation.
+
+**WARNING**
+
+Version 2.1.1 had to switch to the Microsoft msiexec installer to ensure that ASM71 can continue to be installed securely. This means that an automatic upgrade from version 2.1.0 and earlier is not possible. You must therefore manually uninstall all existing installations (both system-wide and local) before version 2.1.1 can be installed.
 
 
 macOS:

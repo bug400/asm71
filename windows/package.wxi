@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
+ <?define InstallName = "asm71" ?>
+ <?define Manufacturer = "bug400" ?>
+ <?define UpgradeCode = "{0C786F40-D1C6-4681-9B1D-AFC9204281AB}" ?>
+ <?define NSISGuid = "{1E8CC6C2-3C5D-4527-8665-86E082414646}" ?>
+ <?define Version = "$(env.Version)" ?>
+ <?define Icon = "" ?>
+ <?if $(env.Platform) = "x64" ?>
+   <?define Win64 = "yes" ?>
+   <?define Staging = "install64" ?>
+   <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+   <?define EnvGlobalGuid = "{d8d3c411-81c9-4ddd-921f-e3d496b0b0f1}"?>
+   <?define EnvLocalGuid = "{52c7225e-c7c6-4da3-8856-613aa3520629}"?>
+ <?else ?>
+   <?define Win64 = "no" ?>
+   <?define Staging = "install32" ?>
+   <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+   <?define EnvGlobalGuid = "{d588c96e-b40c-4d76-95fe-8509d9c972d3}"?>
+   <?define EnvLocalGuid = "{97e80f7d-c4a3-4e03-9b4c-7ea7ab12ecf0}"?>
+ <?endif ?>
+</Include>

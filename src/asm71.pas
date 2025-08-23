@@ -46,7 +46,7 @@ uses sysutils;
 
 const  NULENT = 8; (* Null entry in opcode table *)
        MAXOPCIND = 42;  (* length of opcode index table *)
-       VERSION = 'Vers 2.1.0'; (* assembler version *)
+       VERSION = 'Vers 2.1.1'; (* assembler version *)
 {$ifdef Win32}
        SYS = '(Windows 32bit)';
        {$define SYS_DEFINED}

@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+<!--
+
+Wix 6 sources to generate MSI installer files.
+
+Features:
+Generates msi for 32 and 64bit versions (32bit packages are not supported any more).
+Installable on Windows 10/11 only
+No 32 bit install on 64 bit Windows
+Allows per machine or per user installations. Default is a "per user" installation. The "per machine"
+installation can be enforced by calling the msi file with the command line parameter "ALLUSERS=1".
+Automatic adjustmend/definition of the PATH and LIFUTILSXROMDIR environment variables.
+No patch ore repair possible.
+
+
+Incompatibilities with NSIS installations:
+NSIS installations must be uninstalled manually before doing an MSI package install
+There is no way to deselect the adjustment/definition of the PATH and other package environment variables.
+There is no entry in the start menu any more, because the command prompt entry is obsolete
+and Windows does not show start menu entries which only contain a link to documentation and the uninstaller.
+
+Notes:
+The [Installed] property is set if an installer file already installed its product. It does not matter, if the
+install was a "per user" or "per machine" install. The [Installed] property depends on the MSI file and not
+on [ProductName], [UpgradeCode] or ProductVersion.
+
+-->
+ <?include package.wxi ?>
+ <Package Name="$(var.InstallName)" Manufacturer="$(var.Manufacturer)" ProductCode="*" UpgradeCode="$(var.UpgradeCode)" Language="1033" Codepage="1252" Version="$(var.Version)" Scope="perUserOrMachine">
+
+  <!--
+     This is the only unambiguos information to determine a Windows version 10/11, Windows 11 is also #10
+  -->
+  <Property Id="OSMAJORVERSION">
+     <RegistrySearch Id="OSVersionSearch" Root="HKLM" Key="Software\Microsoft\Windows NT\CurrentVersion" Name="CurrentMajorVersionNumber" Type="raw" />
+  </Property>
+  
+  <!--
+     Disable the repair/modify option from Add or Remove Program
+  <SetProperty Id="ARPNOMODIFY" Value="1" After="InstallValidate" Sequence="execute"/>
+  <SetProperty Id="ARPNOREPAIR" Value="1" After="InstallValidate" Sequence="execute"/>
+  -->
+
+  <!--
+     Check the registry if we have an old NSIS local machine installation. We need the property NSIS_ALLUSERS
+     to terminate the attempt to do a local machine installation with this installer
+  -->
+  <Property Id="NSIS_ALLUSERS">
+     <RegistrySearch Id="NSISSearchLM" Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\$(var.NSISGuid)" Name="UninstallString" Type="raw" />
+  </Property>
+  <!--
+     Check the registry if we have an old NSIS current user installation. We need the property NSIS_CURRENTUSERS
+     to terminate the attempt to do a current machine installation with this installer
+  -->
+  <Property Id="NSIS_CURRENTUSERS">
+     <RegistrySearch Id="NSISSearchCU" Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\$(var.NSISGuid)" Name="UninstallString" Type="raw" />
+  </Property>
+
+  <!-- 
+     Initialize the property ASSISTANCE_USERS which sets the installation scope later in the UI. Only used
+     in WixUI_InstallDirSelectScope
+  -->
+  <Property Id="ASSISTANCE_USERS" Value= "cur"/>
+
+  <!--
+     Set productname according to installation scope
+  -->
+  <Property Id="ConditionalProductName" Value="$(var.InstallName) $(var.Version) (current user)" /> 
+  <SetProperty Id="ConditionalProductName" Before="LaunchConditions" Value="$(var.InstallName) $(var.Version) (all users)" Condition = "ALLUSERS" />
+  <SetProperty Id="ProductName" Before="LaunchConditions" Value="[ConditionalProductName]" />
+
+  <!--
+     Other package settings
+  -->
+  <SummaryInformation Keywords="Installer" Description="$(var.InstallName) $(var.Version)" Manufacturer="$(var.Manufacturer)"/>
+  <MajorUpgrade DowngradeErrorMessage="A newer version of $(var.InstallName) is already installed. Deinstall it manually first." AllowSameVersionUpgrades="yes" />
+  <Media Id="1" Cabinet="$(var.InstallName).cab" EmbedCab="yes"/>
+
+  <?if $(var.Icon)  ?>
+     <Icon Id="icon.ico" SourceFile="$(var.Icon)" />
+     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+  <?endif ?>
+
+  <StandardDirectory Id="$(var.PlatformProgramFilesFolder)">
+    <Directory Id="INSTALLDIR" Name="$(var.InstallName)"/>
+  </StandardDirectory>
+
+  <!--
+     Do not launch a 32 bit package on a 54 bit Windows. We use the existence of the VersionNT64 property here
+  -->
+  <?if $(env.Platform) = "x86" ?>
+    <Launch Message = "This MSI file requires a 32bit Windows 10/11" Condition="NOT VersionNT64"/>
+  <?endif ?>
+
+  <!--
+     Launch only on Windows 10/11
+  -->
+  <Launch Condition="OSMAJORVERSION &gt;&lt; &quot;#10&quot;" Message="[ProductName] requires Windows10/11." />
+
+  <!--
+     Do not launch, if any NSIS Installer version of this product is installed
+  -->
+  <Launch Condition="(NSIS_CURRENTUSERS = &quot;&quot;) AND (NSIS_ALLUSERS = &quot;&quot;)" Message="A $(var.InstallName) installation with an incompatible installer was found. Please deinstall all instances of this version first." />
+
+  <!--
+     Use customized InstallDir UI. The whole component group is installed.
+     - WixUI_InstallDirSelectScope: allows select of "per user" or "per machine" install in a dialog
+     - WidUI_InstallDirMod: does "per user" installation. "per machine" install must be enforced with a command, disables repair
+       line parameter
+
+  <ui:WixUI Id="WixUI_InstallDirSelectScope" InstallDirectory="INSTALLDIR"/>
+  <ui:WixUI Id="WixUI_InstallDirMod" InstallDirectory="INSTALLDIR"/>
+  -->
+  <ui:WixUI Id="WixUI_InstallDir" InstallDirectory="INSTALLDIR"/>
+
+  <Feature Id="Complete" Title="$(var.InstallName) $(var.Version)" Description="The complete package" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR" AllowAbsent="no">
+    <ComponentGroupRef Id="Components"/>
+  </Feature>
+ </Package>
+</Wix>
